@@ -42,7 +42,9 @@ def apiJoin():
     print(insert)
 
     return jsonify({
-        'msg': 'hello'
+        'isSuccess': True,
+        'message': '회원가입에 성공하셨습니다.',
+        'result': {}
     })
 
 @app.route('/api/login', methods=['POST'])
@@ -51,8 +53,9 @@ def apiLogin():
     password = request.form['password']
 
     return jsonify({
-        'msg': 'hello'
-        # 'msg': [ name, password ]
+        'isSuccess': True,
+        'message': '로그인에 성공하셨습니다.',
+        'result': {}
     })
 
 if __name__ == '__main__':
