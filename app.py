@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 
 import json
-from env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
-from database import getMongoClient
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
+from modules.database import getMongoClient
 
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
