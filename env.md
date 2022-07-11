@@ -13,4 +13,7 @@ key = value
 
 ```env
 port = 0000
+MONGO_URL = 'url'
+DATABASE_NAME = 'name'
+COLLECTION_USER = 'users'
 ```
