@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from dotenv import load_dotenv
-load_dotenv()
-
-import os
+from env import port
 
 app = Flask(__name__)
 
@@ -13,5 +10,5 @@ def home():
 if __name__ == '__main__':
     app.run(
         '0.0.0.0',
-        port=os.environ.get('port'),
+        port=port,
         debug=True)
