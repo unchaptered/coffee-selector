@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 import json
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
 from modules.database import getMongoClient
+from modules.form import getSuccessForm, getFailureForm
 
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
@@ -41,22 +42,24 @@ def apiJoin():
     })
     print(insert)
 
-    return jsonify({
-        'isSuccess': True,
-        'message': '회원가입에 성공하셨습니다.',
-        'result': {}
-    })
+    return jsonify(
+        getSuccessForm('회원가입에 성공하셨습니다.', {
+            'name': name,
+            'password': password
+        })
+    );
 
 @app.route('/api/login', methods=['POST'])
 def apiLogin():
     name = request.form['name']
     password = request.form['password']
 
-    return jsonify({
-        'isSuccess': True,
-        'message': '로그인에 성공하셨습니다.',
-        'result': {}
-    })
+    return jsonify(
+        getSuccessForm('로그인에 성공하셨습니다.'), {
+            'name': name,
+            'password': password
+        }
+    )
 
 if __name__ == '__main__':
     app.run(
