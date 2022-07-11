@@ -22,16 +22,10 @@ app = Flask(__name__)
 
 @app.route('/result',methods=["GET"])
 def result_list():
-    arrays_property=request.form['uesrs_choose']
-    list=list(db.articles.find({'writer':[arrays_property.winter]}))
-
+    # arrays_property=request.form['uesrs_choose']
+    # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
+    list=[{'name':'n1','desc':'d1','option':'o1'},{'name':'n2','desc':'d2','option':'o2'}]
     return render_template('/pages/result.html', list=list, title='캡슐커피 취향저격')
-#결과보내기 test
-# @app.route('/api/scrap-nespresso')
-# def scrap_nespresso():
-#     name=request.args.get("name")
-#     return render_template('/pages/scrap-nespresso.html',name=name)
-#
 
 
 @app.route('/join', methods=['GET'])
