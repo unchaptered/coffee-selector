@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
-from env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER
+import json
+from env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
 from database import getMongoClient
 
 app = Flask(__name__)
@@ -21,11 +22,24 @@ def login():
 
 @app.route('/api/join', methods=['POST'])
 def apiJoin():
-    name = request.form['name']
-    password = request.form['password']
-    
-    database[COLLECTION_USER].find_one({}) # 중복 검사
-    database[COLLECTION_USER].insert_one({}) # 아이디 생성
+    body = json.loads(request.get_data(), encoding='utf-8')
+
+    name = body['name']
+    password = body['password']
+
+    # 중복 검사
+    find = database[COLLECTION_USER].find_one({
+        'name': name,
+        'password': password
+    })
+    print(find) # value of None
+
+    # 회원 가입
+    insert = database[COLLECTION_USER].insert_one({
+        'name': name,
+        'password': password
+    })
+    print(insert)
 
     return jsonify({
         'msg': 'hello'
