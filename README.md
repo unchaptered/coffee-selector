@@ -64,3 +64,11 @@ root
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 ```
+
+<hr>
+
+## 문서들
+
+- ./src/static/static.md / 정적 파일 설명
+- ./src/templates/jinja2.md / 탬플릿 엔진 문법 설명
+- ./env.py / 환경변수 설정 설명
