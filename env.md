@@ -7,7 +7,7 @@
 key = value
 ```
 
-## port
+## port=5003
 
 로컬 환경에서 사용할 port 번호를 port = 0000 의 형태로 .env 파일 안에 넣어주세요.
 
