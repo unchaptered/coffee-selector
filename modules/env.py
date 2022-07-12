@@ -9,3 +9,6 @@ DATABASE_NAME = os.environ.get('DATABASE_NAME')             # MongoDB Atlas DB �
 
 COLLECTION_USER = os.environ.get('COLLECTION_USER')         # MongoDB Atlas Collection 이름
 COLLECTION_CAPSULE = os.environ.get('COLLECTION_CAPSULE')   # MongoDB Atlas Collection 이름
+
+TOKEN_SECRET = os.environ.get('TOKEN_SECRET')
+TOKEN_ALGORITHM = os.environ.get('TOKEN_ALGORITHM')
