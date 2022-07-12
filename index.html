@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>취향저격 커피 찾기</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+
+     <style>
+        * {
+            font-family: 'Jua', sans-serif;
+            text-align: center;
+        }
+
+        .button {
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        .posting-box {
+            width: 1080px;
+            margin-top: 20px;
+        }
+
+        .jumbotron jumbotron-fluid {
+            width: 1080px;
+            margin: 0 auto;
+            padding-top: 10px;
+            text-align: center;
+
+        }
+
+        .button-group {
+            padding: 50px;
+            margin: 20px auto 10px auto;
+        }
+
+
+    </style>
+
+
+    <script>
+        $(document).ready(function () {
+            show_comment()
+            save_coffee()
+
+        })
+
+        function show_comment() {
+            $.ajax({
+                type: "GET",
+                url: "/nespresso",
+                data: {},
+                success: function (response) {
+                    let rows = response['nespressos']
+                    for(let i = 0; i < rows.length; i++){
+                        let chocolate = rows[i]['chocolate']
+                        let biscuit = rows[i]['biscuit']
+                        let lemon = rows[i]['lemon']
+                }
+
+            })
+        }
+
+        function save_coffee() {
+            let chocolate = $('#chocolate').val()
+            let biscuit = $('#biscuit').val()
+            let lemon = $('#lemon').val()
+
+
+            $.ajax({
+                type: "POST",
+                url: "/nespresso",
+                data: {chocolate_give: chocolate, biscuit_give: biscuit, lemon_give: lemon},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            })
+        }
+    </script>
+
+</head>
+
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>나의 취향저격 커피 찾기</h1>
+        <div class="posting-box">
+            <div class="d-grid gap-3 d-md-block">
+                <h3>1. 취향저격 케이크 찾기</h3>
+
+                <div class="button-group">
+
+
+                        <button type="button" class="button" id="chocolate" onclick="location.href='/nespresso'"><img
+                                src="https://www.tefal.co.kr/medias/?context=bWFzdGVyfHJvb3R8MTk1NDF8aW1hZ2UvanBlZ3xoYzcvaDAxLzE0MDcwMjUyNDM3NTM0LmpwZ3xhNmFkYzUyNWMyNjkwNmFlZjk0MmE4NGFhNWZjZWJjYWI1MzE5YmMxMTE5OTgzMzNmN2RjMWIxMGIzNjgwMTE3"
+                                class="card-img-top" alt="">강한 맛이 나는 다크 초콜릿 케이크
+                        </button>
+
+                    <button type="button" class="button" id="biscuit" onclick="location.href='/nespresso'"><img
+                            src="https://png.pngtree.com/thumb_back/fh260/background/20210912/pngtree-biscuit-photography-image_867280.jpg"
+                            class="card-img-top" alt="">달달한 맛의 비스킷
+                    </button>
+
+                    <button type="button" class="button" id="lemon" onclick="location.href='/nespresso'"><img
+                            src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202202/24/69918f6b-8252-435e-bd02-f209a53c3586.jpg"
+                            class="card-img-top" alt="">상큼한 과일향의 레몬 케이크
+                    </button>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>
