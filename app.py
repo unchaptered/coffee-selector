@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 
 import json
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
@@ -26,7 +26,6 @@ def join():
 @app.route('/login', methods=['GET'])
 def login():
     return render_template('./pages/login.html', title='캡슐커피 취향저격')
-
 
 @app.route('/api/join', methods=['POST'])
 def apiJoin():
