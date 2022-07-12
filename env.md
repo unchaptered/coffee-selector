@@ -17,5 +17,5 @@ MONGO_URL = 'url'
 DATABASE_NAME = '데이터 베이스 이름'
 COLLECTION_USER = '컬랙션 이름 중 유저'
 
-[//]: #  필요 시 추가 하고 해당 env.md 와 env.py 에 변수 추가해주세요 :) ()
+[//]: # 필요 시 추가 하고 해당 env.md 와 env.py 에 변수 추가해주세요 :) ()
 ```
