@@ -30,10 +30,9 @@ def login():
 
 @app.route('/api/join', methods=['POST'])
 def apiJoin():
-    body = json.loads(request.get_data(), encoding='utf-8')
 
-    name = body['name']
-    password = body['password']
+    name = request.form['name']
+    password = request.form['password']
 
     # 중복 검사
     find = database[COLLECTION_USER].find_one({
@@ -42,7 +41,7 @@ def apiJoin():
     })
     print(find)
 
-    if find is None:
+    if find is not None:
         # 이미 중복된 사용자가 존재하는 경우, -> 회원가입 실패
         return jsonify(
             getSuccessForm('이미 중복된 사용자가 존재합니다.', {
@@ -66,10 +65,9 @@ def apiJoin():
 
 @app.route('/api/login', methods=['POST'])
 def apiLogin():
-    body = json.loads(request.get_data(), encoding='utf-8')
 
-    name = body['name']
-    password = body['passowrd']
+    name = request.form['name']
+    password = request.form['password']
 
     find = database[COLLECTION_USER].find_one({
         'name': name,
