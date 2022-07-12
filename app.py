@@ -1,17 +1,10 @@
 from flask import Flask, render_template, request, jsonify
-<<<<<<< HEAD
-from env import port
-import requests
-from bs4 import BeautifulSoup
-from pymongo import MongoClient
-=======
 
 import json
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
->>>>>>> d04a1b2b3c06f27d951d827d13b0c27a48d1b5ad
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
