@@ -25,7 +25,14 @@ def join():
 
 @app.route('/login', methods=['GET'])
 def login():
-    return render_template('./pages/login.html', title='캡슐커피 취향저격')
+
+    name = request.args.get('name')
+    print(name)
+
+    if name is not None:
+        return render_template('./pages/login.html', name=name, title='캡슐커피 취향 저격')
+    else:
+        return render_template('./pages/login.html', title='캡슐커피 취향저격')
 
 @app.route('/api/join', methods=['POST'])
 def apiJoin():
@@ -43,10 +50,11 @@ def apiJoin():
     if find is not None:
         # 이미 중복된 사용자가 존재하는 경우, -> 회원가입 실패
         return jsonify(
-            getSuccessForm('이미 중복된 사용자가 존재합니다.', {
+            getSuccessForm('이미 중복된 사용자가 존재합니다.', { 
                 'name': name,
                 'password': password
-        }));
+            })
+        );
     else:
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
         insert = database[COLLECTION_USER].insert_one({
@@ -56,7 +64,7 @@ def apiJoin():
 
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
         return jsonify(
-            getSuccessForm('회원가입에 성공하셨습니다.', {
+            getSuccessForm('회원가입에 성공하셨습니다.', { 
                 'name': name,
                 'password': password
             })
