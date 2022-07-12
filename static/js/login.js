@@ -18,8 +18,19 @@ const postLogin = _ => {
             name: $('#name').val(),
             password:  $('#password').val()
         },
-        success: (res) => {
-            console.log(res);
+        success: ({
+            isSuccess,
+            message,
+            result: { name, password, accessToken }
+        }) => {
+            if (isSuccess) {
+                window.alert(message);
+
+                localStorage.setItem('name', name);
+                localStorage.setItem('accessToken', accessToken);
+            } else {
+                return window.alert(message);
+            }
         }
     });
     
