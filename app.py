@@ -1,85 +1,46 @@
-from ast import JoinedStr
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, jsonify, request
+app = Flask(__name__)
 
 import json
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
-app = Flask(__name__)
-database = getMongoClient(MONGO_URL)[DATABASE_NAME]
+from pymongo import MongoClient
+import certifi
 
-# 아이디 비밀번호 서버이름으로 변경해야함
-app = Flask(__name__)
-
-@app.route('/result',methods=["GET"])
-def result_list():
-    # arrays_property=request.form['uesrs_choose']
-    # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
-    list=[{'name':'n1','desc':'d1','option':'o1'},{'name':'n2','desc':'d2','option':'o2'}]
-    return render_template('/pages/result.html', list=list, title='캡슐커피 취향저격')
+ca = certifi.where()
+client = MongoClient('mongodb+srv://test:sparta@cluster0.dvsntob.mongodb.net/cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
+db = client.dbsparta
 
 
-@app.route('/join', methods=['GET'])
-def join():
-    return render_template('./pages/join.html', title='캡슐커피 취향저격')
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-@app.route('/login', methods=['GET'])
-def login():
-    return render_template('./pages/login.html', title='캡슐커피 취향저격')
+@app.route('/nespresso')
+def nespresso():
+    return render_template('index02.html')
 
 
-@app.route('/api/join', methods=['POST'])
-def apiJoin():
-    body = json.loads(request.get_data(), encoding='utf-8')
+@app.route('/nespresso', methods=['GET'])
+def show_nespresso():
+    chocolate_receive = request.args.get('chocolate_give')
+    biscuit_receive = request.args.get('biscuit_give')
+    lemon_receive = request.args.get('lemon_give')
 
-    name = body['name']
-    password = body['password']
+@app.route('/api/nespresso', methods=['POST'])
+def save_nespresso():
+    chocolate_receive = request.form['chocolate_give']
+    biscuit_receive = request.form['biscuit_give']
+    lemon_receive = request.form['lemon_give']
+    doc = {"chocolate": chocolate_receive,
+           "biscuit": biscuit_receive,
+           "lemon": lemon_receive}
+    db.words.insert_one(doc)
+    return jsonify({'result': 'success'})
 
-    # 중복 검사
-    find = database[COLLECTION_USER].find_one({
-        'name': name,
-        'password': password
-    })
 
-    if find is None:
-        # 이미 중복된 사용자가 존재하는 경우, -> 회원가입 실패
-        return jsonify(
-            getSuccessForm('이미 중복된 사용자가 존재합니다.', {
-                'name': name,
-                'password': password
-        }));
-    else:
-        # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
-        insert = database[COLLECTION_USER].insert_one({
-            'name': name,
-            'password': password
-        })
-
-        # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
-        return jsonify(
-            getSuccessForm('회원가입에 성공하셨습니다.', {
-                'name': name,
-                'password': password
-            })
-        );
-    
-
-@app.route('/api/login', methods=['POST'])
-def apiLogin():
-    name = request.form['name']
-    password = request.form['password']
-
-    return jsonify(
-        getSuccessForm('로그인에 성공하셨습니다.'), {
-            'name': name,
-            'password': password
-        }
-    )
 
 if __name__ == '__main__':
-
-    app.run(
-        '0.0.0.0',
-        port=PORT,
-        debug=True)
+    app.run('0.0.0.0', port=5005, debug=True)
