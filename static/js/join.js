@@ -23,9 +23,15 @@ const postJoin = _ => {
             name: $('#name').val(),
             password:  $('#password').val()
         },
-        success: (res) => {
-            console.log(res);
+        success: ({
+            isSuccess,
+            message,
+            result: { name, password }
+        }) => {
+            window.alert(`${name} 으로 회원가입이 완료되었습니다. `);
+            location.href = `/login?name=${name}`
         }
     });
+
     
 }
