@@ -25,10 +25,10 @@ def result_list():
     # querys=requests.form('questions')
     # arrays_pro    perty=request.form['uesrs_choose']
     # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
-    querys=[{'name':'n1','desc':'d1','option':'o1'}]
-    # coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
-    # print(len(coffees))
-    return render_template('/pages/result.html', list=querys, title='캡슐커피 취향저격')
+    # querys=[{'name':'n1','desc':'d1','option':'o1'}]
+    coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
+    print(len(coffees))
+    return render_template('/pages/result.html', list=coffees, title='캡슐커피 취향저격')
 
 @app.route('/join', methods=['GET'])
 def join():
