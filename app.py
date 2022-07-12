@@ -125,7 +125,7 @@ def save_nespresso():
         'milk': milk_receive,
         'size': size_receive
     }
-    db.movies.insert_one(doc)
+    database.COLLECTION_CAPSULE.insert_one(doc)
 
     return jsonify({'msg': '선택 완료!'})
 
