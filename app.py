@@ -1,3 +1,4 @@
+from ast import JoinedStr
 from flask import Flask, render_template, request, jsonify
 
 import json
@@ -40,21 +41,29 @@ def apiJoin():
         'name': name,
         'password': password
     })
-    print(find) # value of None
 
-    # 회원 가입
-    insert = database[COLLECTION_USER].insert_one({
-        'name': name,
-        'password': password
-    })
-    print(insert)
-
-    return jsonify(
-        getSuccessForm('회원가입에 성공하셨습니다.', {
+    if find is None:
+        # 이미 중복된 사용자가 존재하는 경우, -> 회원가입 실패
+        return jsonify(
+            getSuccessForm('이미 중복된 사용자가 존재합니다.', {
+                'name': name,
+                'password': password
+        }));
+    else:
+        # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
+        insert = database[COLLECTION_USER].insert_one({
             'name': name,
             'password': password
         })
-    );
+
+        # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
+        return jsonify(
+            getSuccessForm('회원가입에 성공하셨습니다.', {
+                'name': name,
+                'password': password
+            })
+        );
+    
 
 @app.route('/api/login', methods=['POST'])
 def apiLogin():
