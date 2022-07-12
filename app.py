@@ -40,33 +40,58 @@ def apiJoin():
         'name': name,
         'password': password
     })
-    print(find) # value of None
+    print(find)
 
-    # 회원 가입
-    insert = database[COLLECTION_USER].insert_one({
-        'name': name,
-        'password': password
-    })
-    print(insert)
-
-    return jsonify(
-        getSuccessForm('회원가입에 성공하셨습니다.', {
+    if find is None:
+        # 이미 중복된 사용자가 존재하는 경우, -> 회원가입 실패
+        return jsonify(
+            getSuccessForm('이미 중복된 사용자가 존재합니다.', {
+                'name': name,
+                'password': password
+        }));
+    else:
+        # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
+        insert = database[COLLECTION_USER].insert_one({
             'name': name,
             'password': password
         })
-    );
+
+        # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
+        return jsonify(
+            getSuccessForm('회원가입에 성공하셨습니다.', {
+                'name': name,
+                'password': password
+            })
+        );
 
 @app.route('/api/login', methods=['POST'])
 def apiLogin():
-    name = request.form['name']
-    password = request.form['password']
+    body = json.loads(request.get_data(), encoding='utf-8')
 
-    return jsonify(
-        getSuccessForm('로그인에 성공하셨습니다.'), {
-            'name': name,
-            'password': password
-        }
-    )
+    name = body['name']
+    password = body['passowrd']
+
+    find = database[COLLECTION_USER].find_one({
+        'name': name,
+        'password': password
+    })
+
+    if find is not None:
+        return jsonify(
+            getSuccessForm('로그인에 성공하셨습니다.', {
+                'name': name,
+                'password': password
+            })
+        )
+    else:
+        return jsonify(
+            getFailureForm('로그인에 실패하셨습니다.', {
+                'name': name,
+                'password': password
+            })
+        )
+
+    
 
 if __name__ == '__main__':
 
