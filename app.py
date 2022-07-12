@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify, redirect
 
-import json
-from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
+from modules.tokenizer import getToken
 
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
@@ -27,7 +27,6 @@ def join():
 def login():
 
     name = request.args.get('name')
-    print(name)
 
     if name is not None:
         return render_template('./pages/login.html', name=name, title='캡슐커피 취향 저격')
@@ -82,10 +81,12 @@ def apiLogin():
     })
 
     if find is not None:
+        token = getToken({ 'name': name }, TOKEN_SECRET, TOKEN_ALGORITHM )
         return jsonify(
             getSuccessForm('로그인에 성공하셨습니다.', {
                 'name': name,
-                'password': password
+                'password': password,
+                'accessToken': token
             })
         )
     else:
