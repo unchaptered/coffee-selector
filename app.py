@@ -16,10 +16,10 @@ def result_list():
     # querys=requests.form('questions')
     # arrays_pro    perty=request.form['uesrs_choose']
     # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
-    querys=[{'name':'n1','desc':'d1','option':'o1'}]
-    # coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
-    # print(len(coffees))
-    return render_template('/pages/result.html', list=querys, title='캡슐커피 취향저격')
+    # querys=[{'name':'n1','desc':'d1','option':'o1'}]
+    coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
+    print(len(coffees))
+    return render_template('/pages/result.html', list=coffees, title='캡슐커피 취향저격')
 
 @app.route('/join', methods=['GET'])
 def join():
@@ -105,7 +105,29 @@ def apiLogin():
             getFailureForm('로그인에 실패하셨습니다.')
         )
 
-    
+@app.route('/nespresso', methods=['GET'])
+def show_nespresso():
+    name = request.form['name']
+    return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
+
+@app.route("/nespresso", methods=["POST"])
+def save_nespresso():
+    cake_receive = request.form['cake_give']
+    apple_receive = request.form['apple_give']
+    strength_receive = request.form['strength_give']
+    milk_receive = request.form['milk_give']
+    size_receive = request.form['size_give']
+
+    doc = {
+        'cake': cake_receive,
+        'apple': apple_receive,
+        'strength': strength_receive,
+        'milk': milk_receive,
+        'size': size_receive
+    }
+    db.movies.insert_one(doc)
+
+    return jsonify({'msg': '선택 완료!'})
 
 if __name__ == '__main__':
 
