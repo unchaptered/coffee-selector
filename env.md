@@ -7,13 +7,15 @@
 key = value
 ```
 
-## port
+## port=5003
 
 로컬 환경에서 사용할 port 번호를 port = 0000 의 형태로 .env 파일 안에 넣어주세요.
 
 ```env
 port = 0000
 MONGO_URL = 'url'
-DATABASE_NAME = 'name'
-COLLECTION_USER = 'users'
+DATABASE_NAME = '데이터 베이스 이름'
+COLLECTION_USER = '컬랙션 이름 중 유저'
+
+[//]: #  필요 시 추가 하고 해당 env.md 와 env.py 에 변수 추가해주세요 :) ()
 ```

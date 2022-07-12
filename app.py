@@ -1,14 +1,23 @@
 from flask import Flask, render_template, request, jsonify
 
-from env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER
-from database import getMongoClient
+import json
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
+from modules.database import getMongoClient
+from modules.form import getSuccessForm, getFailureForm
 
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
-@app.route('/')
-def home():
-    return render_template('index.html', title='캡슐커피 취향저격')
+# 아이디 비밀번호 서버이름으로 변경해야함
+app = Flask(__name__)
+
+@app.route('/result',methods=["GET"])
+def result_list():
+    # arrays_property=request.form['uesrs_choose']
+    # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
+    list=[{'name':'n1','desc':'d1','option':'o1'},{'name':'n2','desc':'d2','option':'o2'}]
+    return render_template('/pages/result.html', list=list, title='캡슐커피 취향저격')
+
 
 @app.route('/join', methods=['GET'])
 def join():
@@ -21,27 +30,46 @@ def login():
 
 @app.route('/api/join', methods=['POST'])
 def apiJoin():
-    name = request.form['name']
-    password = request.form['password']
-    
-    database[COLLECTION_USER].find_one({}) # 중복 검사
-    database[COLLECTION_USER].insert_one({}) # 아이디 생성
+    body = json.loads(request.get_data(), encoding='utf-8')
 
-    return jsonify({
-        'msg': 'hello'
+    name = body['name']
+    password = body['password']
+
+    # 중복 검사
+    find = database[COLLECTION_USER].find_one({
+        'name': name,
+        'password': password
     })
+    print(find) # value of None
+
+    # 회원 가입
+    insert = database[COLLECTION_USER].insert_one({
+        'name': name,
+        'password': password
+    })
+    print(insert)
+
+    return jsonify(
+        getSuccessForm('회원가입에 성공하셨습니다.', {
+            'name': name,
+            'password': password
+        })
+    );
 
 @app.route('/api/login', methods=['POST'])
 def apiLogin():
     name = request.form['name']
     password = request.form['password']
 
-    return jsonify({
-        'msg': 'hello'
-        # 'msg': [ name, password ]
-    })
+    return jsonify(
+        getSuccessForm('로그인에 성공하셨습니다.'), {
+            'name': name,
+            'password': password
+        }
+    )
 
 if __name__ == '__main__':
+
     app.run(
         '0.0.0.0',
         port=PORT,
