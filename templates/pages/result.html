@@ -1,53 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .content {
-            margin-top: 20px;
-            width: 1080px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header + {
-            margin-bottom: 30px;
-        }
-
-        .card-box > div {
-            width: 1000px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-    </style>
-    <script>
-            function image_btn(name) {
-                console.log(name)
-                alert('check')
-                window.location.href='/api/scrap-nespresso?name='+name
-            }
-    </script>
-</head>
-<body>
+{% extends 'layout/layout.html' %}
+{% block content %}
+    <link href="../static/css/result.css" rel="stylesheet" type="text/css" />
+<script src="../static/js/result.js"></script>
 <div class="content">
     <h1 class="header">제목</h1>
     <div class="card-box">
@@ -55,11 +9,11 @@
             {% for  arr in list %}
                 <div class="col">
                     <div class="card h-100">
-                        <button onclick=image_btn('{{ arr.name }}') class="image-btn" id="{{name}}">
+                        <button onclick=image_btn('{{ arr.name }}') class="image-btn" id="{{arr.name}}">
                             <img src="https://www.nespresso.com/ecom/medias/sys_master/public/15431416021022/Exotic-Liminha-VL-PLP-Before-318x318-2022.png?impolicy=product&imwidth=150"
                                  class="card-img-top" alt="...">
                         </button>
-                        <label for="{{name}}">
+                        <label for="{{arr.name}}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ arr.name }}</h5>
                                 <p class="card-text">{{ arr.desc }}</p>
@@ -72,5 +26,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+    {% endblock %}
