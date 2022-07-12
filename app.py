@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-import requests
 from flask import Flask, render_template, request, jsonify
 
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
-from modules.database import getMongoClient
-from modules.form import getSuccessForm, getFailureForm
-=======
-from flask import Flask, render_template, request, jsonify, redirect
-
-from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
 from modules.tokenizer import getToken
 from modules.validate import validate_name, validate_password
 
->>>>>>> 6da545725dccc019f347c5eb27495b5c86df58e0
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
