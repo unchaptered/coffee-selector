@@ -2,18 +2,14 @@
 
 
 {% block content %}
-    <!-- <link href="../static/css/result.css" rel="stylesheet" type="text/css" /> -->
+    <link href="../../static/css/pages/join-login.css" rel="stylesheet" type="text/css" />
+    <script src="../../static/js/controller/dom.controller.js"></script>
+    <script src="../../static/js/validator/form.validaor.js"></script>
     <script src="../../static/js/login.js"></script>
 
-    <div class="container" stlye="
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    ">
+    <div class="container" id="login_container">
 
-        <div style="width:70%; margin: 0 auto;">
+        <div id="login_inner_container">
             {#bg-light#}
             <div class="p-5 text-center">
                 <h2 class="mb-2">캡슐커피</h2>
@@ -22,7 +18,11 @@
 
             <div class="form-floating mb-3">
 
-              <input type="text" class="form-control" id="name" placeholder="이름">
+                {% if name %}
+                    <input type="text" class="form-control" id="name" name="name" placeholder="이름" value="{{ name }}" />
+                {% else %}
+                    <input type="text" class="form-control" id="name" name="name" placeholder="이름" />
+                {% endif %}
               <label for="name">이름</label>
 
             </div>
@@ -33,6 +33,9 @@
               <input type="password" class="form-control" id="password" placeholder="비밀번호">
               <label for="password">비밀번호</label>
 
+            </div>
+            
+            <div class="form-validate-messenger">
             </div>
 
             <div class="p-5 text-center">
