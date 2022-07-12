@@ -9,9 +9,7 @@ app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
 # 아이디 비밀번호 서버이름으로 변경해야함
-db = client.dbsparta
 app = Flask(__name__)
-
 
 @app.route('/result',methods=["GET"])
 def result_list():
