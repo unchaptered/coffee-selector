@@ -24,7 +24,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
 
-     <style>
+    <style>
         * {
             font-family: 'Jua', sans-serif;
             text-align: center;
@@ -34,6 +34,7 @@
             width: 300px;
             height: 400px;
             margin: 0 auto;
+            font-size: large;
         }
 
         .posting-box {
@@ -57,40 +58,30 @@
 
     </style>
 
-
     <script>
         $(document).ready(function () {
-            show_comment()
-            save_coffee()
+            listing()
 
         })
 
-        function show_comment() {
+        function listing() {
             $.ajax({
                 type: "GET",
                 url: "/nespresso",
                 data: {},
                 success: function (response) {
-                    let rows = response['nespressos']
-                    for(let i = 0; i < rows.length; i++){
-                        let chocolate = rows[i]['chocolate']
-                        let biscuit = rows[i]['biscuit']
-                        let lemon = rows[i]['lemon']
                 }
-
             })
         }
 
         function save_coffee() {
-            let chocolate = $('#chocolate').val()
-            let biscuit = $('#biscuit').val()
-            let lemon = $('#lemon').val()
-
+            let red = $('#red').val()
+            let green = $('#green').val()
 
             $.ajax({
                 type: "POST",
                 url: "/nespresso",
-                data: {chocolate_give: chocolate, biscuit_give: biscuit, lemon_give: lemon},
+                data: {red_give:red, green_give:green},
                 success: function (response) {
                     alert(response['msg'])
                     window.location.reload()
@@ -107,25 +98,21 @@
         <h1>나의 취향저격 커피 찾기</h1>
         <div class="posting-box">
             <div class="d-grid gap-3 d-md-block">
-                <h3>1. 취향저격 케이크 찾기</h3>
+                <h3>2. 취향저격 사과 찾기</h3>
 
                 <div class="button-group">
 
 
-                        <button type="button" class="button" id="chocolate" onclick="location.href='/nespresso'"><img
-                                src="https://www.tefal.co.kr/medias/?context=bWFzdGVyfHJvb3R8MTk1NDF8aW1hZ2UvanBlZ3xoYzcvaDAxLzE0MDcwMjUyNDM3NTM0LmpwZ3xhNmFkYzUyNWMyNjkwNmFlZjk0MmE4NGFhNWZjZWJjYWI1MzE5YmMxMTE5OTgzMzNmN2RjMWIxMGIzNjgwMTE3"
-                                class="card-img-top" alt="">강한 맛이 나는 다크 초콜릿 케이크
+                        <button type="button" class="button" id="red" onclick="window.location.href='/nespresso/hard'"><img
+                                src="https://post-phinf.pstatic.net/MjAxNzAyMTRfMjgy/MDAxNDg3MDQ5MzU3MjE2.lfNsDH8cOcSOAt2tfIk2WJ0SI2KuDQHoKZglXQ3RKFIg.7ohLKNNPFPPWb8_XOuA5QFgmhZ3dfCi_XqgIVX3xXL4g.JPEG/%EC%82%AC%EA%B3%BC_%281%29.jpg?type=w1200"
+                                class="card-img-top" alt=""> 달콤하고 부드러운 식감의 빨간 사과
                         </button>
 
-                    <button type="button" class="button" id="biscuit" onclick="location.href='/nespresso'"><img
-                            src="https://png.pngtree.com/thumb_back/fh260/background/20210912/pngtree-biscuit-photography-image_867280.jpg"
-                            class="card-img-top" alt="">달달한 맛의 비스킷
+                    <button type="button" class="button" id="green" onclick="window.location.href='/nespresso/hard'"><img
+                            src="https://t1.daumcdn.net/cfile/tistory/995961385D1B0E1610"
+                            class="card-img-top" alt=""> 산미가 있고 씹히는 식감의 녹색 사과
                     </button>
 
-                    <button type="button" class="button" id="lemon" onclick="location.href='/nespresso'"><img
-                            src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202202/24/69918f6b-8252-435e-bd02-f209a53c3586.jpg"
-                            class="card-img-top" alt="">상큼한 과일향의 레몬 케이크
-                    </button>
 
 
 
