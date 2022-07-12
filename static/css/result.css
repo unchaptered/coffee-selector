@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    margin-top: 20px;
+    width: 1080px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header + {
+    margin-bottom: 30px;
+}
+
+.card-box > div {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.image-btn{
+    border: 1px solid gray;
+}
+.image-btn:hover{
+    border: 1px solid black;
+}
