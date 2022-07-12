@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import requests
+from flask import Flask, render_template, request, jsonify
+
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE
+from modules.database import getMongoClient
+from modules.form import getSuccessForm, getFailureForm
+=======
 from flask import Flask, render_template, request, jsonify, redirect
 
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
@@ -7,19 +15,20 @@ from modules.form import getSuccessForm, getFailureForm
 from modules.tokenizer import getToken
 from modules.validate import validate_name, validate_password
 
+>>>>>>> 6da545725dccc019f347c5eb27495b5c86df58e0
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
-# 아이디 비밀번호 서버이름으로 변경해야함
-app = Flask(__name__)
-
+#결과창
 @app.route('/result',methods=["GET"])
 def result_list():
-    # arrays_property=request.form['uesrs_choose']
+    # querys=requests.form('questions')
+    # arrays_pro    perty=request.form['uesrs_choose']
     # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
-    list=[{'name':'n1','desc':'d1','option':'o1'},{'name':'n2','desc':'d2','option':'o2'}]
-    return render_template('/pages/result.html', list=list, title='캡슐커피 취향저격')
-
+    querys=[{'name':'n1','desc':'d1','option':'o1'}]
+    # coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
+    # print(len(coffees))
+    return render_template('/pages/result.html', list=querys, title='캡슐커피 취향저격')
 
 @app.route('/join', methods=['GET'])
 def join():
