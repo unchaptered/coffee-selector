@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <meta charset='utf-8'>
+    <meta name='description' content={{ description }}>
+    <link rel='shortcut icon' href='/favicon.ico'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+</head>
+<style>
+    * {
+        font-family: 'Jua', sans-serif;
+        text-align: center;
+    }
+
+    .title {
+        background-color: antiquewhite;
+        background-size: 100%;
+
+    }
+
+    .button {
+        width: 300px;
+        height: 250px;
+        margin: 0 auto;
+    }
+
+    .posting-box {
+        width: 1080px;
+        margin-top: 20px;
+    }
+
+    .jumbotron jumbotron-fluid {
+        width: 1080px;
+        margin: 0 auto;
+        background-size: 100%;
+    }
+
+    .button-group {
+        padding: 10px;
+        margin: 10px auto 10px auto;
+    }
+
+    .form-select{
+        width: 40%;
+        margin: auto;
+    }
+
+</style>
+
+<script>
+
+
+    $(document).ready(function () {
+        show_nespresso()
+        save_nespresso()
+
+    })
+
+    function show_nespresso() {
+        $.ajax({
+            type: "GET",
+            url: "/nespresso",
+            data: {},
+            success: function (response) {
+              alert(response['msg'])
+                }
+            })
+    }
+
+    function save_nespresso() {
+        let cake = $('#cake').val()
+        let apple = $('#apple').val()
+        let strength = $('#strength').val()
+        let milk = $('#milk').val()
+        let size = $('#size').val()
+
+
+        $.ajax({
+            type: "POST",
+            url: "/nespresso",
+            data: {cake_give: cake, apple_give: apple, strength_give: strength, milk_give:milk, size_give:size},
+            success: function (response) {
+                alert(response['msg'])
+            }
+        })
+    }
+</script>
+
+
+<body>
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="title">
+        <h1>{{ name }}의 취향저격 커피 찾기</h1></div>
+    <div class="posting-box">
+        <div class="d-grid gap-3 d-md-block">
+            <h4>1. {{ name }}의 취향저격 케이크 찾기</h4>
+            <select class="form-select" id="cake">
+                <option selected>-- 선택하기 --</option>
+                <option value="chocolaate">초콜릿 케이크</option>
+                <option value="biscuit">비스킷</option>
+                <option value="lemon">레몬 케이크</option>
+            </select>
+            <div class="button-group">
+                <button type="button" class="button"><img
+                        src="https://www.tefal.co.kr/medias/?context=bWFzdGVyfHJvb3R8MTk1NDF8aW1hZ2UvanBlZ3xoYzcvaDAxLzE0MDcwMjUyNDM3NTM0LmpwZ3xhNmFkYzUyNWMyNjkwNmFlZjk0MmE4NGFhNWZjZWJjYWI1MzE5YmMxMTE5OTgzMzNmN2RjMWIxMGIzNjgwMTE3"
+                        class="card-img-top" alt="">강한 맛이 나는 다크 초콜릿 케이크
+                </button>
+                <button type="button" class="button"><img
+                        src="https://png.pngtree.com/thumb_back/fh260/background/20210912/pngtree-biscuit-photography-image_867280.jpg"
+                        class="card-img-top" alt="">달달한 맛의 비스킷
+                </button>
+                <button type="button" class="button"><img
+                        src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202202/24/69918f6b-8252-435e-bd02-f209a53c3586.jpg"
+                        class="card-img-top" alt="">상큼한 과일향의 레몬 케이크
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="posting-box">
+            <div class="d-grid gap-3 d-md-block">
+                <h4>2. {{ name }}의 취향저격 사과 찾기</h4>
+                <select class="form-select" id="apple">
+                <option selected>-- 선택하기 --</option>
+                <option value="red">빨간 사과</option>
+                <option value="green">녹색 사과</option>
+            </select>
+                <div class="button-group">
+                    <button type="button" class="button"><img
+                            src="https://post-phinf.pstatic.net/MjAxNzAyMTRfMjgy/MDAxNDg3MDQ5MzU3MjE2.lfNsDH8cOcSOAt2tfIk2WJ0SI2KuDQHoKZglXQ3RKFIg.7ohLKNNPFPPWb8_XOuA5QFgmhZ3dfCi_XqgIVX3xXL4g.JPEG/%EC%82%AC%EA%B3%BC_%281%29.jpg?type=w1200"
+                            class="card-img-top" alt=""> 달콤하고 부드러운 식감의 빨간 사과
+                    </button>
+                    <button type="button" class="button"><img
+                            src="https://t1.daumcdn.net/cfile/tistory/995961385D1B0E1610"
+                            class="card-img-top" alt=""> 산미가 있고 씹히는 식감의 녹색 사과
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="posting-box">
+            <div class="d-grid gap-3 d-md-block">
+                <h4>3.{{ name }}의 취향저격 강도 찾기</h4>
+                <select class="form-select" id="strength">
+                <option selected>-- 선택하기 --</option>
+                <option value="hard">강한 강도의 커피</option>
+                <option value="soft">부드러운 강도의 커피</option>
+            </select>
+                <div class="button-group">
+                    <button type="button" class="button"><img
+                            src="https://img.insight.co.kr/static/2021/11/14/700/img_20211114092456_mu5t0kv4.webp"
+                            class="card-img-top" alt="">진한 여운을 남기는 강한 강도
+                    </button>
+                    <button type="button" class="button"><img
+                            src="https://cdn.imweb.me/upload/S20210622d5560521bd622/659c95a30c3b8.png"
+                            class="card-img-top" alt="">가벼운 부드러운 강도
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="posting-box">
+            <div class="d-grid gap-3 d-md-block">
+                <h4>4.{{ name }}의 취향저격 커피 종류</h4>
+                <select class="form-select" id="milk">
+                <option selected>-- 선택하기 --</option>
+                <option value="black">블랙 커피</option>
+                <option value="latte">카페 라떼</option>
+            </select>
+                <div class="button-group">
+                    <button type="button" class="button"><img
+                            src="https://t3e9i9b6.stackpathcdn.com/wp-content/uploads/2022/01/3-900x600.jpeg"
+                            class="card-img-top" alt=""> 아무 것도 넣지 않은 순수한 맛의 블랙 커피
+                    </button>
+                    <button type="button" class="button"><img
+                            src="https://images.ctfassets.net/a97lsixqgsyg/7HPI5iY5REY4N7d4y1h6jV/d1116d25544cbf96eccef75713306d11/20220203_040813-1024x718.png?w=944&q=100"
+                            class="card-img-top" alt=""> 우유 또는 달콤한 향을 함유한 커피
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="posting-box">
+            <div class="d-grid gap-3 d-md-block">
+                <h4>5.{{ name }}의 취향저격 커피 사이즈</h4>
+                <select class="form-select" id="size">
+                <option selected>-- 선택하기 --</option>
+                <option value="small">작은 사이즈의 커피(리스트레토 또는 에스프레소)</option>
+                <option value="middle">중간 사이즈의 커피(룽고 또는 그랑룽고)</option>
+                <option value="large">큰 사이즈의 커피(아메리카노 또는 머그)</option>
+            </select>
+                <div class="button-group">
+                    <button type="button" class="button"><img
+                            src="https://mblogthumb-phinf.pstatic.net/20110516_229/rhazes7_13054788726337Tbpz_JPEG/espresso-xl.jpg?type=w2"
+                            class="card-img-top" alt=""> 작은 사이즈의 커피
+                    </button>
+                    <button type="button" class="button"><img
+                            src="https://www.nespresso.com/ecom/medias/sys_master/public/14090124853278/Accessories-responsive-mainPDP-6272x2432px-Gran-Lungo-set.jpg?impolicy=productPdpSafeZone&imwidth=1238"
+                            class="card-img-top" alt=""> 중간 사이즈의 커피
+                    </button>
+                    <button type="button" class="button"><img
+                            src="https://i0.wp.com/baristanews.co.kr/wp-content/uploads/2015/09/coffee-471691_1280.jpg?resize=770%2C578"
+                            class="card-img-top" alt=""> 큰 사이즈의 커피
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <button class="btn btn-primary" type="button" onclick="window.location.href='/'" >로그인 화면으로!</button>
+  <button class="btn btn-primary" type="button" onclick="window.location.href='/nespresso/select'">취향저격 커피 보기!</button>
+</div>
+{% endblock %}
+</html>
