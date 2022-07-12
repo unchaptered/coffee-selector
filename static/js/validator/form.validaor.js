@@ -32,9 +32,9 @@ const invalidColor = 'wrong_validate';
  const validatePasswordConfirm = (p, p2) => p === p2;
  
  
- const classSwitcher = (isValid, target, set) => {
-     if (isValid) classRemover(target, set);
-     else classApplier(target, set);
+ const classSwitcher = (isValid, target) => {
+     if (isValid) classRemover(target);
+     else classApplier(target);
  }
  const classRemover = (target) => {
      const switcher = {
