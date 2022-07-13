@@ -42,6 +42,7 @@ root
 | pymongo, dnspython | MongoDB 커넥터 |
 | requests, bs4 | 크롤링용 모듈 |
 | PyJWT | JWT 토큰 모듈 |
+| Bcrypt-Flask | 비밀번호 암호화 모듈(단방향) |
 
 <hr>
 

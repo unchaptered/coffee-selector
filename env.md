@@ -13,17 +13,6 @@ key = value
 
 ```env
 port = 0000
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-MONGO_URL = 'url'
-DATABASE_NAME = '데이터 베이스 이름'
-COLLECTION_USER = '컬랙션 이름 중 유저'
-COLLECTION_CAPSULE = '컬랙션 이름 중 커피캡슐'
-COLLECTION_SELECT = '유저가 선택한 커피'
-=======
->>>>>>> 6da545725dccc019f347c5eb27495b5c86df58e0
->>>>>>> 8f9e3f0d16c5e40b568e53ccb7800ae67893e472
 
 # For database
 MONGO_URL = 'MongoDB 접속용 URL'

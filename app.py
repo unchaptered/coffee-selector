@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, redirect, render_template, request, jsonify, url_for
 
 # Provider : 특정 기능을 공급하는 함수들
 from db import getUser, getSelect, getCapsule
@@ -7,9 +7,9 @@ from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORIT
 
 # Validator : 특정 값의 유효성을 테스트하는 함수들
 from src.modules.vadliator.form_validator import validate_name, validate_password
-
 # Tokenizer : 토큰을 생성하는 함수
 from src.modules.auth.tokenizer import getToken
+from src.modules.auth.bcrypt import getBcrypt, getHashPw
 
 app = Flask(__name__)
 
@@ -89,24 +89,31 @@ def login():
     else:
         return render_template('./pages/login.html', title='캡슐커피 취향저격')
 
+@app.route('/login/guest', methods=['GET'])
+def login_as_guest():
+    return redirect(url_for('select'));
+
 @app.route('/api/join', methods=['POST'])
-def apiJoin():
+def api_join():
 
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
-
+    
     if name is None or password is None:
         return jsonify(
-            getFailureForm('유효하지 않는 가입을 전달 받았습니다.', {
+            getFailureForm('텅빈 이름/비밀번호를 전달 받았습니다.', {
                 'name': name,
                 'password': password
             })
         )
 
+    hashed_password = getHashPw(getBcrypt(app), password)
+
+    print(name, password, hashed_password)
     # 중복 검사
     find = getUser().find_one({
         'name': name,
-        'password': password
+        'password': hashed_password
     })
 
     if find is not None:
@@ -118,19 +125,19 @@ def apiJoin():
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
         insert = getUser().insert_one({
             'name': name,
-            'password': password
+            'password': hashed_password
         })
 
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
         return jsonify(
             getSuccessForm('회원가입에 성공하셨습니다.', { 
                 'name': name,
-                'password': password
+                'password': '비공개'
             })
         );
 
 @app.route('/api/login', methods=['POST'])
-def apiLogin():
+def api_login():
 
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
@@ -140,9 +147,11 @@ def apiLogin():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
+    hashed_password = getHashPw(getBcrypt(app), password)
+
     find = getUser().find_one({
         'name': name,
-        'password': password
+        'password': hashed_password
     })
 
     if find is not None:
@@ -150,7 +159,7 @@ def apiLogin():
         return jsonify(
             getSuccessForm('로그인에 성공하셨습니다.', {
                 'name': name,
-                'password': password,
+                'password': '비공개',
                 'accessToken': token
             })
         )
