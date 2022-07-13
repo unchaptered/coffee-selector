@@ -21,7 +21,6 @@
 <body>
 
 {% block content %}
-<<<<<<< HEAD
 <div class="jumbotron jumbotron-fluid">
     <div class="title">
         <h1><span id="name">{{ name }}</span>의 취향저격 커피 찾기</h1></div>
@@ -47,40 +46,8 @@
                         src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202202/24/69918f6b-8252-435e-bd02-f209a53c3586.jpg"
                         class="card-img-top" alt="">상큼한 과일향의 레몬 케이크
                 </button>
-=======
     <script src="../../static/js/select.js"></script>
     <link href="../../static/css/pages/select.css" rel="stylesheet" type="text/css" />
-    <div class="jumbotron jumbotron-fluid">
-        <div class="title">
-            <h1>나의 취향저격 커피 찾기</h1></div>
-        <div class="posting-box">
-            <div class="d-grid gap-3 d-md-block">
-                <h4>1.취향저격 케이크 찾기</h4>
-                <select class="form-select" id="cake">
-                    <option selected>-- 선택하기 --</option>
-                    <option value="chocolaate">초콜릿 케이크</option>
-                    <option value="biscuit">비스킷</option>
-                    <option value="lemon">레몬 케이크</option>
-                </select>
-                <div class="button-group">
-                    <button type="button" class="button"><img
-                            src="https://www.tefal.co.kr/medias/?context=bWFzdGVyfHJvb3R8MTk1NDF8aW1hZ2UvanBlZ3xoYzcvaDAxLzE0MDcwMjUyNDM3NTM0LmpwZ3xhNmFkYzUyNWMyNjkwNmFlZjk0MmE4NGFhNWZjZWJjYWI1MzE5YmMxMTE5OTgzMzNmN2RjMWIxMGIzNjgwMTE3"
-                            class="card-img-top" alt="">강한 맛이 나는 다크 초콜릿 케이크
-                    </button>
-                    <button type="button" class="button"><img
-                            src="https://png.pngtree.com/thumb_back/fh260/background/20210912/pngtree-biscuit-photography-image_867280.jpg"
-                            class="card-img-top" alt="">달달한 맛의 비스킷
-                    </button>
-                    <button type="button" class="button"><img
-                            src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202202/24/69918f6b-8252-435e-bd02-f209a53c3586.jpg"
-                            class="card-img-top" alt="">상큼한 과일향의 레몬 케이크
-                    </button>
-                </div>
->>>>>>> 3f07a494d0a6af8f44c79c080448fe9141f60c46
-            </div>
-        </div>
-    </div>
-
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="posting-box">
@@ -183,19 +150,12 @@
         </div>
     </div>
 
-<<<<<<< HEAD
 </body>
-<div class="d-grid gap-2 col-6 mx-auto">
-  <button class="btn btn-primary" type="button" onclick="window.location.href='/'" >메인 화면으로!</button>
-  <button class="btn btn-primary" type="button" onclick="window.location.href='/result?name={{ name }}'">취향저격 커피 보기!</button>
-</div>
-=======
     </body>
     <div class="d-grid gap-2 col-6 mx-auto">
         <button class="btn btn-outline-warning" type="button" onclick="window.location.href='/'">메인 화면으로!</button>
-        <button class="btn btn-outline-warning" type="button" onclick="window.location.href='/pages/result.html'">취향저격 커피 보기!
+        <button class="btn btn-outline-warning" type="button" onclick="save_nespresso()">취향저격 커피 보기!
         </button>
     </div>
->>>>>>> 3f07a494d0a6af8f44c79c080448fe9141f60c46
 {% endblock %}
 </html>
