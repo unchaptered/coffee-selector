@@ -1,0 +1,37 @@
+* {
+    font-family: 'Jua', sans-serif;
+    text-align: center;
+}
+
+.title {
+    background-color: antiquewhite;
+    background-size: 100%;
+
+}
+
+.button {
+    width: 300px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.posting-box {
+    width: 1080px;
+    margin-top: 20px;
+}
+
+.jumbotron jumbotron-fluid {
+    width: 1080px;
+    margin: 0 auto;
+    background-size: 100%;
+}
+
+.button-group {
+    padding: 10px;
+    margin: 10px auto 10px auto;
+}
+
+.form-select {
+    width: 40%;
+    margin: auto;
+}
