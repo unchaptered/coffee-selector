@@ -1,7 +1,11 @@
 import requests
 from flask import Flask, render_template, request, jsonify
 
+<<<<<<< HEAD
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE,COLLECTION_SELECT,TOKEN_SECRET,TOKEN_ALGORITHM
+=======
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
+>>>>>>> 1fa09ee59ab57d00cb9870d2a29dd50697cfed30
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
@@ -133,7 +137,36 @@ def apiLogin():
             getFailureForm('로그인에 실패하셨습니다.')
         )
 
-    
+#선택창 이름 불러오기
+@app.route('/nespresso', methods=['GET'])
+def show_nespresso():
+    name = request.form['name']
+    return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
+
+#선택 값 저장하기
+@app.route("/nespresso", methods=["POST"])
+def save_nespresso():
+    cake_receive = request.form['cake_give']
+    apple_receive = request.form['apple_give']
+    strength_receive = request.form['strength_give']
+    milk_receive = request.form['milk_give']
+    size_receive = request.form['size_give']
+
+    doc = {
+        'cake': cake_receive,
+        'apple': apple_receive,
+        'strength': strength_receive,
+        'milk': milk_receive,
+        'size': size_receive
+    }
+    database.COLLECTION_CAPSULE.insert_one(doc)
+
+    return jsonify({'msg': '선택 완료!'})
+
+#index 창
+@app.route("/")
+def main():
+    return render_template("index.html")
 
 if __name__ == '__main__':
 
