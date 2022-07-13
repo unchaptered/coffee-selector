@@ -22,7 +22,7 @@ def result_list():
     # 5
     coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
     print(len(coffees))
-    return render_template('/pages/result.html', list=querys, title='캡슐커피 취향저격',user_name=
+    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격',user_name=
     # request.form['name']
     'name'
     )
@@ -140,8 +140,7 @@ def apiLogin():
 #선택창 이름 불러오기
 @app.route('/nespresso', methods=['GET'])
 def show_nespresso():
-    name = request.form['name']
-    return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
+    return render_template('./pages/select.html', title='캡슐커피 취향저격')
 
 #선택 값 저장하기
 @app.route("/nespresso", methods=["POST"])
