@@ -8,6 +8,7 @@ $(document).ready(
         $('#name').addClass(invalidColor);
         $('#password').addClass(invalidColor);
         $('#passwordConfirm').addClass(invalidColor);
+        $('#submit').addClass(invalidColor2);
 
         const validationMessage = 'form-validate-messenger';
         const validationTargets = new Set(['이름', '비밀번호', '비밀번호 확인']);
@@ -17,6 +18,7 @@ $(document).ready(
 
             isValidName = validateName(name);
             classSwitcher(isValidName, 'name');
+            classSwitcher(isValidName && isValidPassword && isValidPasswordConfirm, 'allConditions');
             setSwitcher(isValidName, 'name', validationTargets);
             updateValidateMessage(validationMessage, validationTargets);
 
@@ -26,6 +28,7 @@ $(document).ready(
 
             isValidPassword = validatePassword(pw);
             classSwitcher(isValidPassword, 'password');
+            classSwitcher(isValidName && isValidPassword && isValidPasswordConfirm, 'allConditions');
             setSwitcher(isValidPassword, 'password', validationTargets);
             updateValidateMessage(validationMessage, validationTargets);
 
@@ -34,14 +37,14 @@ $(document).ready(
         $('#passwordConfirm').keyup( ({ originalEvent: { target: { value: pw } } }) => {
             
             isValidPasswordConfirm = isValidPassword && validatePasswordConfirm(pw, $('#password').val());
-            console.log(isValidPasswordConfirm);
             classSwitcher(isValidPassword && isValidPasswordConfirm, 'passwordConfirm');
+            classSwitcher(isValidName && isValidPassword && isValidPasswordConfirm, 'allConditions');
             setSwitcher(isValidPassword && isValidPasswordConfirm, 'passwordConfirm', validationTargets);
             updateValidateMessage(validationMessage, validationTargets);
 
         });
 
-        
+        updateValidateMessage(validationMessage, validationTargets);
 
     }
 )
