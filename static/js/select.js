@@ -16,13 +16,12 @@
     }
 
     function save_nespresso() {
-        let cake = $('#cake').val()
-        let apple = $('#apple').val()
-        let strength = $('#strength').val()
-        let milk = $('#milk').val()
-        let size = $('#size').val()
-
-
+        let cake = $("#cake option:selected").val();
+        let apple = $("#apple option:selected").val();
+        let strength = $("#strength option:selected").val();
+        let milk = $("#milk option:selected").val();
+        let size =  $("#size option:selected").val();
+        
         $.ajax({
             type: "POST",
             url: "/nespresso",
