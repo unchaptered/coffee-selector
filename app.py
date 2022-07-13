@@ -134,7 +134,8 @@ def save_nespresso():
 #index 창
 @app.route("/")
 def main():
-    return render_template("index.html")
+    name = request.form['name']
+    return render_template("index.html", name=name)
 
 if __name__ == '__main__':
 
