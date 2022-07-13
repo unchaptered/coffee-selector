@@ -1,4 +1,5 @@
 const invalidColor = 'wrong_validate';
+const invalidColor2 = 'form_button-invalid';
 
 /**
  * 이름 유효성 검사,
@@ -33,14 +34,18 @@ const invalidColor = 'wrong_validate';
  
  
  const classSwitcher = (isValid, target) => {
+
      if (isValid) classRemover(target);
      else classApplier(target);
+
  }
+
  const classRemover = (target) => {
      const switcher = {
          'name': () => $('#name').removeClass(invalidColor),
          'password': () => $('#password').removeClass(invalidColor),
          'passwordConfirm': () => $('#passwordConfirm').removeClass(invalidColor),
+         'allConditions': () => $('#submit').removeClass(invalidColor2)
      }
      switcher[target]();
  }
@@ -49,6 +54,7 @@ const invalidColor = 'wrong_validate';
          'name': () => $('#name').addClass(invalidColor),
          'password': () => $('#password').addClass(invalidColor),
          'passwordConfirm': () => $('#passwordConfirm').addClass(invalidColor),
+         'allConditions': () => $('#submit').addClass(invalidColor2)
      }
      switcher[target]();
  }
