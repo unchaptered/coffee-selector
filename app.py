@@ -107,7 +107,9 @@ def apiJoin():
             })
         )
 
-    hashed_password = getBcrypt(app).generate_password_hash(password)
+    hashed_password = getBcrypt(app).generate_password_hash(password).decode('ascii')
+
+    print(name, password, hashed_password)
     # 중복 검사
     find = getUser().find_one({
         'name': name,
@@ -145,7 +147,8 @@ def apiLogin():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
-    hashed_password = getBcrypt(app).generate_password_hash(password)
+    hashed_password = getBcrypt(app).generate_password_hash(password).decode('ascii')
+
     find = getUser().find_one({
         'name': name,
         'password': hashed_password
