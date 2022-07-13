@@ -56,6 +56,7 @@ const postLogin = _ => {
 
                 localStorage.setItem('name', name);
                 localStorage.setItem('accessToken', accessToken);
+                location.href = `/nespresso?name=${name}`
             } else {
                 return window.alert(message);
             }
