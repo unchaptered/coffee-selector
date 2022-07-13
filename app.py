@@ -11,14 +11,38 @@ from modules.validate import validate_name, validate_password
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('index.html', title='캡슐커피 취향저격')
 
 #결과창
 @app.route('/result', methods=["GET"])
 def result_list():
-
+    doc={
+        'cake_receive' : request.form['cake_give'],
+        'apple_receive' : request.form['apple_give'],
+        'strength_receive' : request.form['strength_give'],
+        'milk_receive' : request.form['milk_give'],
+        'size_receive' : request.form['size_give'],
+    }
+    def taste(doc):
+        strong_sum=0
+        for i in doc:
+            strong_sum+=2-int(i)
+        if strong_sum > 5:
+            strong_sum=5;
+        if strong_sum<0:
+            strong_sum=0;
+        bitter_sum=0
+        for i in doc:
+            strong_sum+=2-int(i)
+        if strong_sum > 5:
+            strong_sum=5;
+        if strong_sum<0:
+            strong_sum=0;strong_sum=0
+        for i in doc:
+            strong_sum+=2-int(i)
+        if strong_sum > 5:
+            strong_sum=5;
+        if strong_sum<0:
+            strong_sum=0;
 
     coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
     print(len(coffees))
@@ -140,26 +164,6 @@ def apiLogin():
 def show_nespresso():
     name = request.args.get('name')
     return render_template('./pages/select.html', title='캡슐커피 취향저격', name=name)
-
-#선택 값 저장하기
-@app.route("/nespresso", methods=["POST"])
-def save_nespresso():
-    cake_receive = request.form['cake_give']
-    apple_receive = request.form['apple_give']
-    strength_receive = request.form['strength_give']
-    milk_receive = request.form['milk_give']
-    size_receive = request.form['size_give']
-
-    doc = {
-        'cake': cake_receive,
-        'apple': apple_receive,
-        'strength': strength_receive,
-        'milk': milk_receive,
-        'size': size_receive
-    }
-    database[COLLECTION_CAPSULE].insert_one(doc)
-
-    return jsonify({'msg': '선택 완료!'})
 
 #index 창
 @app.route("/")
