@@ -1,11 +1,11 @@
 import requests
 from flask import Flask, render_template, request, jsonify
 
-<<<<<<< HEAD
+# <<<<<<< HEAD
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE,COLLECTION_SELECT,TOKEN_SECRET,TOKEN_ALGORITHM
-=======
+# =======
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
->>>>>>> 1fa09ee59ab57d00cb9870d2a29dd50697cfed30
+# >>>>>>> 1fa09ee59ab57d00cb9870d2a29dd50697cfed30
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
@@ -166,7 +166,8 @@ def save_nespresso():
 #index 창
 @app.route("/")
 def main():
-    return render_template("index.html")
+    img='..\static\coffee.png'
+    return render_template("/pages/index.html",img=img)
 
 if __name__ == '__main__':
 
