@@ -13,7 +13,7 @@ from src.modules.auth.tokenizer import getToken
 
 app = Flask(__name__)
 
-결과창
+# 결과창
 @app.route('/result', methods=["GET"])
 def result_list():
     doc={
