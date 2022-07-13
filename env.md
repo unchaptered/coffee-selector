@@ -13,19 +13,13 @@ key = value
 
 ```env
 port = 0000
-<<<<<<< HEAD
-MONGO_URL = 'url'
-DATABASE_NAME = '데이터 베이스 이름'
-COLLECTION_USER = '컬랙션 이름 중 유저'
-COLLECTION_CAPSULE = '컬랙션 이름 중 커피캡슐'
-=======
->>>>>>> 6da545725dccc019f347c5eb27495b5c86df58e0
 
 # For database
 MONGO_URL = 'MongoDB 접속용 URL'
 DATABASE_NAME = 'MongoDB 데이터베이스 이름'
 COLLECTION_USER = 'users'
 COLLECTION_CAPSULE = 'capsules'
+COLLECTION_SELECT = '유저가 선택한 커피'
 
 # For Tokenizer
 TOKEN_SECRET = '암호화 키'

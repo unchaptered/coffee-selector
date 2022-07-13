@@ -1,6 +1,7 @@
+import requests
 from flask import Flask, render_template, request, jsonify
-
-from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
+# <<<<<<< HEAD
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, COLLECTION_SELECT, TOKEN_SECRET, TOKEN_ALGORITHM
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
@@ -17,13 +18,40 @@ def index():
 #결과창
 @app.route('/result', methods=["GET"])
 def result_list():
-    # querys=requests.form('questions')
-    # arrays_pro    perty=request.form['uesrs_choose']
-    # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
-    # querys=[{'name':'n1','desc':'d1','option':'o1'}]
+    # querys=requests.form.getlist('nespros')
+    # 5
     coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
     print(len(coffees))
-    return render_template('/pages/result.html', list=coffees, title='캡슐커피 취향저격')
+    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격',user_name=
+    # request.form['name']
+    'name'
+    )
+
+@app.route('/api/result',methods=["POST"])
+def saver_cof():
+    print('checkapi')
+    cof_name=request.form['cof_name']
+    user_name=request.form['user_name']
+    print(cof_name,user_name)
+    find = database[COLLECTION_SELECT].find_one({
+        'user_name': user_name,
+    })
+
+    if find is not None:
+        # 전에 선택했던 사용자인 경우
+        database[COLLECTION_SELECT].update_one({'user_name':user_name},{'$set':{'cof_name':cof_name}})
+    else:
+        # 사용한 기록이 없는 사용자안 경우 -> 기록
+        insert = database[COLLECTION_SELECT].insert_one({
+            'user_name': user_name,
+            'cof_name': cof_name
+        })
+    return jsonify(
+            getSuccessForm('기록성공', {
+                'name':user_name,
+                'cof_name': cof_name,
+            })
+        )
 
 @app.route('/join', methods=['GET'])
 def join():
@@ -109,11 +137,12 @@ def apiLogin():
             getFailureForm('로그인에 실패하셨습니다.')
         )
 
+#선택창 이름 불러오기
 @app.route('/nespresso', methods=['GET'])
 def show_nespresso():
-    name = request.form['name']
-    return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
+    return render_template('./pages/select.html', title='캡슐커피 취향저격')
 
+#선택 값 저장하기
 @app.route("/nespresso", methods=["POST"])
 def save_nespresso():
     cake_receive = request.form['cake_give']
@@ -129,9 +158,15 @@ def save_nespresso():
         'milk': milk_receive,
         'size': size_receive
     }
-    db.movies.insert_one(doc)
+    database.COLLECTION_CAPSULE.insert_one(doc)
 
     return jsonify({'msg': '선택 완료!'})
+
+#index 창
+@app.route("/")
+def main():
+    img='https://www.nespresso.com/shared_res/mos/free_html/kr/images/Voltesso-Mobile.jpg'
+    return render_template("/pages/index.html",img=img)
 
 if __name__ == '__main__':
 
