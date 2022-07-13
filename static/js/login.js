@@ -14,6 +14,7 @@ $(document).ready(
             
             isValidName = validateName(name);
             classSwitcher(isValidName, 'name');
+            classSwitcher(isValidName && isValidPassword, 'allConditions');
             setSwitcher(isValidName, 'name', validationTargets);
             updateValidateMessage(validationMessage, validationTargets);
 
@@ -22,12 +23,13 @@ $(document).ready(
 
             isValidPassword = validatePassword(pw);
             classSwitcher(isValidPassword, 'password');
+            classSwitcher(isValidName && isValidPassword, 'allConditions');
             setSwitcher(isValidPassword, 'password', validationTargets);
             updateValidateMessage(validationMessage, validationTargets);
 
         });
 
-        updateValidateMessage('form-validate-messenger', new Set(['이름', '비밀번호']));
+        updateValidateMessage(validationMessage, validationTargets);
     }
 )
 

@@ -1,27 +1,13 @@
-
 .wrap {
-    width: 1080px;
-    margin: 10px auto;
-    border: 1px solid wheat;
-}
+    width: 100vw;
+    height: 100vh;
 
-.wrap img {
-    width: 100%;
-    vertical-align: middle;
 
-    background-color: white;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.text {
-    position: absolute;
-    top: 330px;
-    right: 500px;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
+    background-image: cover;
 }
 
 .btn btn-outline-warning {
