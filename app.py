@@ -129,6 +129,10 @@ def save_nespresso():
 
     return jsonify({'msg': '선택 완료!'})
 
+@app.route("/")
+def main():
+    return render_template("index.html")
+
 if __name__ == '__main__':
 
     app.run(
