@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 # Provider : 특정 기능을 공급하는 함수들
-from db import database
-from src.modules.provider.mongo_provider import getUserConnection, getSelectConnection, getCapsuleConnection
+from db import database, getUserConnection, getSelectConnection, getCapsuleConnection
 from src.modules.provider.form_provider import getSuccessForm, getFailureForm 
 from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORITHM
 
@@ -14,7 +13,7 @@ from src.modules.auth.tokenizer import getToken
 
 app = Flask(__name__)
 
-#결과창
+결과창
 @app.route('/result', methods=["GET"])
 def result_list():
     doc={
@@ -46,7 +45,7 @@ def result_list():
         if strong_sum<0:
             strong_sum=0;
 
-    coffees=list(getCapsuleConnection(database).find({},{'_id':False}))
+    coffees=list(getCapsuleConnection().find({},{'_id':False}))
     print(len(coffees))
     return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격', user_name='name')
 
@@ -56,16 +55,16 @@ def saver_cof():
     cof_name=request.form['cof_name']
     user_name=request.form['user_name']
     print(cof_name,user_name)
-    find = getSelectConnection(database).find_one({
+    find = getSelectConnection().find_one({
         'user_name': user_name,
     })
 
     if find is not None:
         # 전에 선택했던 사용자인 경우
-        getSelectConnection(database).update_one({'user_name':user_name},{'$set':{'cof_name':cof_name}})
+        getSelectConnection().update_one({'user_name':user_name},{'$set':{'cof_name':cof_name}})
     else:
         # 사용한 기록이 없는 사용자안 경우 -> 기록
-        insert = getSelectConnection(database).insert_one({
+        insert = getSelectConnection().insert_one({
             'user_name': user_name,
             'cof_name': cof_name
         })
@@ -105,7 +104,7 @@ def apiJoin():
         )
 
     # 중복 검사
-    find = getUserConnection(database).find_one({
+    find = getUserConnection().find_one({
         'name': name,
         'password': password
     })
@@ -117,7 +116,7 @@ def apiJoin():
         );
     else:
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
-        insert = getUserConnection(database).insert_one({
+        insert = getUserConnection().insert_one({
             'name': name,
             'password': password
         })
@@ -141,7 +140,7 @@ def apiLogin():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
-    find = getUserConnection(database).find_one({
+    find = getUserConnection().find_one({
         'name': name,
         'password': password
     })

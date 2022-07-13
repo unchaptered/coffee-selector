@@ -1,4 +1,4 @@
-from pymongo import MongoClient, Database
+from pymongo import MongoClient
 from ..config.config_provider import COLLECTION_USER, COLLECTION_CAPSULE, COLLECTION_SELECT
 
 def getMongoClient(MONGO_URL):
@@ -8,14 +8,14 @@ def getMongoClient(MONGO_URL):
     """
     return MongoClient(MONGO_URL)
 
-def getDatabase(MONGO_URL: str, DATABASE_NAME: str) -> Database:
+def getDatabase(MONGO_URL: str, DATABASE_NAME: str) -> any:
     return MongoClient(MONGO_URL)[DATABASE_NAME]
 
-def getUserConnection(database: Database):
+def getUserConnection(database: any):
     return database[COLLECTION_USER]
 
-def getCapsuleConnection(database: Database):
+def getCapsuleConnection(database: any):
     return database[COLLECTION_CAPSULE]
 
-def getSelectConnection(database: Database):
+def getSelectConnection(database: any):
     return database[COLLECTION_SELECT]
