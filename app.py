@@ -18,14 +18,11 @@ database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 #결과창
 @app.route('/result',methods=["GET"])
 def result_list():
-    # querys=requests.form.getlist('nespros')
-    # 5
+
+
     coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
     print(len(coffees))
-    return render_template('/pages/result.html', list=querys, title='캡슐커피 취향저격',user_name=
-    # request.form['name']
-    'name'
-    )
+    return render_template('/pages/result.html', list=coffees, title='캡슐커피 취향저격',user_name=request.args.get('name'))
 
 @app.route('/api/result',methods=["POST"])
 def saver_cof():
@@ -140,7 +137,7 @@ def apiLogin():
 #선택창 이름 불러오기
 @app.route('/nespresso', methods=['GET'])
 def show_nespresso():
-    name = request.form['name']
+    name = request.args.get('name')
     return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
 
 #선택 값 저장하기
@@ -159,7 +156,7 @@ def save_nespresso():
         'milk': milk_receive,
         'size': size_receive
     }
-    database.COLLECTION_CAPSULE.insert_one(doc)
+    database[COLLECTION_CAPSULE].insert_one(doc)
 
     return jsonify({'msg': '선택 완료!'})
 

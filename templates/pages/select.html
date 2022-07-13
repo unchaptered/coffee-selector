@@ -23,7 +23,7 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
     <div class="title">
-        <h1>{{ name }}의 취향저격 커피 찾기</h1></div>
+        <h1><span id="name">{{ name }}</span>의 취향저격 커피 찾기</h1></div>
     <div class="posting-box">
         <div class="d-grid gap-3 d-md-block">
             <h4>1. {{ name }}의 취향저격 케이크 찾기</h4>
@@ -156,7 +156,7 @@
 </body>
 <div class="d-grid gap-2 col-6 mx-auto">
   <button class="btn btn-primary" type="button" onclick="window.location.href='/'" >메인 화면으로!</button>
-  <button class="btn btn-primary" type="button" onclick="window.location.href='/pages/result.html'">취향저격 커피 보기!</button>
+  <button class="btn btn-primary" type="button" onclick="window.location.href='/result?name={{ name }}'">취향저격 커피 보기!</button>
 </div>
 {% endblock %}
 </html>
