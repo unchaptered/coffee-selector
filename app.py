@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, render_template, request, jsonify
-# <<<<<<< HEAD
+
 from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, COLLECTION_SELECT, TOKEN_SECRET, TOKEN_ALGORITHM
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
