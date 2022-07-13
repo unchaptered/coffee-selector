@@ -166,7 +166,7 @@ def save_nespresso():
 #index 창
 @app.route("/")
 def main():
-    img='..\static\coffee.png'
+    img='https://www.nespresso.com/shared_res/mos/free_html/kr/images/Voltesso-Mobile.jpg'
     return render_template("/pages/index.html",img=img)
 
 if __name__ == '__main__':
