@@ -9,7 +9,7 @@ from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORIT
 from src.modules.vadliator.form_validator import validate_name, validate_password
 # Tokenizer : 토큰을 생성하는 함수
 from src.modules.auth.tokenizer import getToken
-from src.modules.auth.bcrypt import getBcrypt
+from src.modules.auth.bcrypt import getBcrypt, getHashPw
 
 app = Flask(__name__)
 
@@ -107,7 +107,7 @@ def apiJoin():
             })
         )
 
-    hashed_password = getBcrypt(app).generate_password_hash(password).decode('ascii')
+    hashed_password =  getHashPw(getBcrypt(app), password)
 
     print(name, password, hashed_password)
     # 중복 검사
@@ -147,7 +147,7 @@ def apiLogin():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
-    hashed_password = getBcrypt(app).generate_password_hash(password).decode('ascii')
+    hashed_password = getHashPw(getBcrypt(app), password)
 
     find = getUser().find_one({
         'name': name,
