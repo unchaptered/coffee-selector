@@ -5,6 +5,7 @@
 - 저장소 : https://github.com/unchaptered/coffee-selector
 - 작업표 : https://github.com/users/unchaptered/projects/5
 - 기술문서 : README.md 최하단의 기술문서 리스트를 참고해주세요.
+- 아 테스트 하기 너무 좋아 
 
 <hr>
 
