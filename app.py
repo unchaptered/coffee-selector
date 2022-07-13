@@ -1,11 +1,7 @@
 import requests
 from flask import Flask, render_template, request, jsonify
-
 # <<<<<<< HEAD
-from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE,COLLECTION_SELECT,TOKEN_SECRET,TOKEN_ALGORITHM
-# =======
-from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
-# >>>>>>> 1fa09ee59ab57d00cb9870d2a29dd50697cfed30
+from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, COLLECTION_SELECT, TOKEN_SECRET, TOKEN_ALGORITHM
 from modules.database import getMongoClient
 from modules.form import getSuccessForm, getFailureForm
 
@@ -15,21 +11,19 @@ from modules.validate import validate_name, validate_password
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html', title='캡슐커피 취향저격')
+
 #결과창
-@app.route('/result',methods=["GET"])
+@app.route('/result', methods=["GET"])
 def result_list():
 
 
     coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
     print(len(coffees))
-<<<<<<< HEAD
-    return render_template('/pages/result.html', list=coffees, title='캡슐커피 취향저격',user_name=request.args.get('name'))
-=======
-    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격',user_name=
-    # request.form['name']
-    'name'
+    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격', user_name='name'
     )
->>>>>>> 3f07a494d0a6af8f44c79c080448fe9141f60c46
 
 @app.route('/api/result',methods=["POST"])
 def saver_cof():
@@ -144,12 +138,8 @@ def apiLogin():
 #선택창 이름 불러오기
 @app.route('/nespresso', methods=['GET'])
 def show_nespresso():
-<<<<<<< HEAD
     name = request.args.get('name')
-    return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
-=======
-    return render_template('./pages/select.html', title='캡슐커피 취향저격')
->>>>>>> 3f07a494d0a6af8f44c79c080448fe9141f60c46
+    return render_template('./pages/select.html', title='캡슐커피 취향저격', name=name)
 
 #선택 값 저장하기
 @app.route("/nespresso", methods=["POST"])
