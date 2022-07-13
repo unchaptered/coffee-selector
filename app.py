@@ -14,14 +14,14 @@ database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 #결과창
 @app.route('/result',methods=["GET"])
 def result_list():
-    # querys=requests.form('questions')
-    querys=[{'name':'n1','desc':'d1','option':'o1'}]
+    # querys=requests.form.getlist('nespros')
+    # 5
     coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
     print(len(coffees))
     return render_template('/pages/result.html', list=querys, title='캡슐커피 취향저격',user_name=
     # request.form['name']
     'name'
-                           )
+    )
 
 @app.route('/api/result',methods=["POST"])
 def saver_cof():
