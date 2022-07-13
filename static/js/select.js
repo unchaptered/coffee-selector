@@ -1,7 +1,5 @@
 $(document).ready(function () {
     show_nespresso()
-    save_nespresso()
-
 })
 
 function show_nespresso() {
@@ -10,7 +8,7 @@ function show_nespresso() {
         url: "/nespresso",
         data: {},
         success: function (response) {
-            alert(response['msg'])
+            console.log('success')
         }
     })
 }
@@ -24,7 +22,7 @@ function save_nespresso() {
 
     $.ajax({
         type: "POST",
-        url: "/nespresso",
+        url: "/result",
         data: {cake_give: cake, apple_give: apple, strength_give: strength, milk_give: milk, size_give: size},
         success: function (response) {
             alert(response['msg'])
