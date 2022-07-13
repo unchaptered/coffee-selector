@@ -23,52 +23,26 @@
 
 </head>
 
-<style>
-    .wrap {
-        width: 1080px;
-        margin: 10px auto;
-        border: 1px solid wheat;
-    }
 
-    .wrap img {
-        width: 100%;
-        vertical-align: middle;
-
-        background-color: white;
-        background-image: url('{{ url_for("static", filename= "coffee.png") }}');
-
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-
-    .text {
-        padding: 5px 10px;
-        text-align: center;
-    }
-</style>
 
 <body>
 {% block content %}
 <div class="wrap">
-    <div class="image"></div>
+    <div class="image" style="background-image: url('{{ url_for("static", filename= "coffee.png") }}');"></div>
     <div class="text">
         <div class="text-table">
             <div class="text-table-row">
                 <div class="text-table-cell">
                     <h1>{{ title }}</h1>
                     <button type="button" class="btn btn-outline-warning" onclick="window.location.href = '/nespresso'">{{ name }}의 취향저격 커피 선택하기</button>
-                    <button type="button" class="btn btn-outline-warning" onclick="window.location.href = '/'">다시 로그인 하기</button>
-
+                    <button type="button" class="btn btn-outline-warning" onclick="window.location.href = '/login'">다시 로그인 하기</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-
-
-</body>
+{% endblock %}
 </html>
 
-{% endblock %}
+
