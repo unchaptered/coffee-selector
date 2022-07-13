@@ -3,11 +3,11 @@ from src.modules.config.config_provider import MONGO_URL, DATABASE_NAME
 
 database = getDatabase(MONGO_URL, DATABASE_NAME);
 
-def getUserConnection():
+def getUser():
     return getUserConnection(database)
 
-def getCapsuleConnection():
+def getCapsule():
     return getCapsuleConnection(database)
 
-def getSelectConnection():
+def getSelect():
     return getSelectConnection(database)
