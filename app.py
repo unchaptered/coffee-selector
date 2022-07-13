@@ -46,10 +46,9 @@ def result_list():
         if strong_sum<0:
             strong_sum=0;
 
-    coffees=list(getCapsuleConnection().find({},{'_id':False}))
+    coffees=list(getCapsuleConnection(database).find({},{'_id':False}))
     print(len(coffees))
-    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격', user_name='name'
-    )
+    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격', user_name='name')
 
 @app.route('/api/result',methods=["POST"])
 def saver_cof():
@@ -57,16 +56,16 @@ def saver_cof():
     cof_name=request.form['cof_name']
     user_name=request.form['user_name']
     print(cof_name,user_name)
-    find = getSelectConnection().find_one({
+    find = getSelectConnection(database).find_one({
         'user_name': user_name,
     })
 
     if find is not None:
         # 전에 선택했던 사용자인 경우
-        getSelectConnection().update_one({'user_name':user_name},{'$set':{'cof_name':cof_name}})
+        getSelectConnection(database).update_one({'user_name':user_name},{'$set':{'cof_name':cof_name}})
     else:
         # 사용한 기록이 없는 사용자안 경우 -> 기록
-        insert = getSelectConnection().insert_one({
+        insert = getSelectConnection(database).insert_one({
             'user_name': user_name,
             'cof_name': cof_name
         })
@@ -106,7 +105,7 @@ def apiJoin():
         )
 
     # 중복 검사
-    find = getUserConnection().find_one({
+    find = getUserConnection(database).find_one({
         'name': name,
         'password': password
     })
@@ -118,7 +117,7 @@ def apiJoin():
         );
     else:
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
-        insert = getUserConnection().insert_one({
+        insert = getUserConnection(database).insert_one({
             'name': name,
             'password': password
         })
@@ -142,7 +141,7 @@ def apiLogin():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
-    find = getUserConnection().find_one({
+    find = getUserConnection(database).find_one({
         'name': name,
         'password': password
     })
