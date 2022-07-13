@@ -9,6 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -30,9 +31,9 @@
             <h4>1. {{ name }}의 취향저격 케이크 찾기</h4>
             <select class="form-select" id="cake">
                 <option selected>-- 선택하기 --</option>
-                <option value="chocolaate">초콜릿 케이크</option>
-                <option value="biscuit">비스킷</option>
-                <option value="lemon">레몬 케이크</option>
+                <option value="2">초콜릿 케이크</option>
+                <option value="1">비스킷</option>
+                <option value="0">레몬 케이크</option>
             </select>
             <div class="button-group">
                 <button type="button" class="button"><img
@@ -58,9 +59,9 @@
                 <h4>1.취향저격 케이크 찾기</h4>
                 <select class="form-select" id="cake">
                     <option selected>-- 선택하기 --</option>
-                    <option value="chocolaate">초콜릿 케이크</option>
-                    <option value="biscuit">비스킷</option>
-                    <option value="lemon">레몬 케이크</option>
+                    <option value="2">초콜릿 케이크</option>
+                    <option value="1">비스킷</option>
+                    <option value="0">레몬 케이크</option>
                 </select>
                 <div class="button-group">
                     <button type="button" class="button"><img
@@ -88,8 +89,8 @@
                     <h4>2. 취향저격 사과 찾기</h4>
                     <select class="form-select" id="apple">
                         <option selected>-- 선택하기 --</option>
-                        <option value="red">빨간 사과</option>
-                        <option value="green">녹색 사과</option>
+                        <option value="1">빨간 사과</option>
+                        <option value="0">녹색 사과</option>
                     </select>
                     <div class="button-group">
                         <button type="button" class="button"><img
@@ -112,8 +113,8 @@
                     <h4>3. 취향저격 강도 찾기</h4>
                     <select class="form-select" id="strength">
                         <option selected>-- 선택하기 --</option>
-                        <option value="hard">강한 강도의 커피</option>
-                        <option value="soft">부드러운 강도의 커피</option>
+                        <option value="1">강한 강도의 커피</option>
+                        <option value="0">부드러운 강도의 커피</option>
                     </select>
                     <div class="button-group">
                         <button type="button" class="button"><img
@@ -136,8 +137,8 @@
                     <h4>4. 취향저격 커피 종류</h4>
                     <select class="form-select" id="milk">
                         <option selected>-- 선택하기 --</option>
-                        <option value="black">블랙 커피</option>
-                        <option value="latte">카페 라떼</option>
+                        <option value="1">블랙 커피</option>
+                        <option value="0">카페 라떼</option>
                     </select>
                     <div class="button-group">
                         <button type="button" class="button"><img
@@ -160,9 +161,9 @@
                     <h4>5. 취향저격 커피 사이즈</h4>
                     <select class="form-select" id="size">
                         <option selected>-- 선택하기 --</option>
-                        <option value="small">작은 사이즈의 커피(리스트레토 또는 에스프레소)</option>
-                        <option value="middle">중간 사이즈의 커피(룽고 또는 그랑룽고)</option>
-                        <option value="large">큰 사이즈의 커피(아메리카노 또는 머그)</option>
+                        <option value="0">작은 사이즈의 커피(리스트레토 또는 에스프레소)</option>
+                        <option value="1">중간 사이즈의 커피(룽고 또는 그랑룽고)</option>
+                        <option value="2">큰 사이즈의 커피(아메리카노 또는 머그)</option>
                     </select>
                     <div class="button-group">
                         <button type="button" class="button"><img
