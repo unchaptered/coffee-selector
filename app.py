@@ -101,7 +101,7 @@ def api_join():
     
     if name is None or password is None:
         return jsonify(
-            getFailureForm('유효하지 않는 가입을 전달 받았습니다.', {
+            getFailureForm('텅빈 이름/비밀번호를 전달 받았습니다.', {
                 'name': name,
                 'password': password
             })
