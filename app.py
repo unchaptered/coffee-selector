@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 from db import database
 from src.modules.provider.mongo_provider import getUserConnection, getSelectConnection, getCapsuleConnection
 from src.modules.provider.form_provider import getSuccessForm, getFailureForm 
-from src.modules.config.config_provider import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, COLLECTION_SELECT, TOKEN_SECRET, TOKEN_ALGORITHM
+from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORITHM
 
 # Validator : 특정 값의 유효성을 테스트하는 함수들
 from src.modules.vadliator.form_validator import validate_name, validate_password
