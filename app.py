@@ -105,11 +105,13 @@ def apiLogin():
             getFailureForm('로그인에 실패하셨습니다.')
         )
 
+#선택창 이름 불러오기
 @app.route('/nespresso', methods=['GET'])
 def show_nespresso():
     name = request.form['name']
     return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
 
+#선택 값 저장하기
 @app.route("/nespresso", methods=["POST"])
 def save_nespresso():
     cake_receive = request.form['cake_give']
@@ -129,6 +131,7 @@ def save_nespresso():
 
     return jsonify({'msg': '선택 완료!'})
 
+#index 창
 @app.route("/")
 def main():
     return render_template("index.html")
