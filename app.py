@@ -94,7 +94,7 @@ def login_as_guest():
     return redirect(url_for('select'));
 
 @app.route('/api/join', methods=['POST'])
-def apiJoin():
+def api_join():
 
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
@@ -107,7 +107,7 @@ def apiJoin():
             })
         )
 
-    hashed_password =  getHashPw(getBcrypt(app), password)
+    hashed_password = getHashPw(getBcrypt(app), password)
 
     print(name, password, hashed_password)
     # 중복 검사
@@ -137,7 +137,7 @@ def apiJoin():
         );
 
 @app.route('/api/login', methods=['POST'])
-def apiLogin():
+def api_login():
 
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
