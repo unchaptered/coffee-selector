@@ -13,19 +13,24 @@ function show_nespresso() {
     })
 }
 
-function save_nespresso() {
-    let cake = $("#cake").val("value");
-    let apple = $("#apple").val("value");
-    let strength = $("#strength").val("value");
-    let milk = $("#milk").val("value");
-    let size = $("#size").val("value");
 
+function save_nespresso() {
+    let name = localStorage.getItem('name');
+    let cake = $("#cake option:selected").val();
+    let apple = $("#apple option:selected").val();
+    let strength = $("#strength option:selected").val();
+    let milk = $("#milk option:selected").val();
+    let size =  $("#size option:selected").val();
+    console.log(name)
     $.ajax({
         type: "POST",
-        url: "/result",
-        data: {cake_give: cake, apple_give: apple, strength_give: strength, milk_give: milk, size_give: size},
-        success: function (response) {
-            alert(response['msg'])
+        url: "/nespresso",
+        data: {name:name,cake_give: cake, apple_give: apple, strength_give: strength, milk_give:milk, size_give:size},
+        success: ({
+            msg
+        }) => {
+            window.alert(msg);
+            location.href = `/result?name=`+name
         }
     })
 }

@@ -10,15 +10,15 @@
                 {% for  arr in list %}
                     <div class="col">
                         <div class="card h-100">
-                            <button onclick=select_btn('{{ user_name }}','{{ arr.name }}') class="image-btn" id="{{ arr.name }}">
+                            <button onclick=select_btn({{ user_name }},{{ arr.title }}) class="image-btn" id="{{ arr.title }}">
                                 <img src="https://www.nespresso.com/ecom/medias/sys_master/public/15431416021022/Exotic-Liminha-VL-PLP-Before-318x318-2022.png?impolicy=product&imwidth=150"
                                      class="card-img-top" alt="...">
                             </button>
                             <label for="{{ arr.name }}">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ arr.name }}</h5>
-                                    <p class="card-text">{{ arr.desc }}</p>
-                                    <p class="card-text">{{ arr.option }}</p>
+                                    <h5 class="card-title">{{ arr.title }}</h5>
+                                    <p class="card-text">{{ arr.description.info }}</p>
+                                    <p class="card-text">{{ arr.description.history }}</p>
                                 </div>
                             </label>
                         </div>
