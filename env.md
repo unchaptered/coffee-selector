@@ -26,6 +26,7 @@ MONGO_URL = 'MongoDB 접속용 URL'
 DATABASE_NAME = 'MongoDB 데이터베이스 이름'
 COLLECTION_USER = 'users'
 COLLECTION_CAPSULE = 'capsules'
+COLLECTION_SELECT = '유저가 선택한 커피'
 
 # For Tokenizer
 TOKEN_SECRET = '암호화 키'
