@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 
 # Provider : 특정 기능을 공급하는 함수들
-from src.modules.provider.mongo_provider import getDatabase, getUserConnection, getSelectConnection, getCapsuleConnection
+from db import database
+from src.modules.provider.mongo_provider import getUserConnection, getSelectConnection, getCapsuleConnection
 from src.modules.provider.form_provider import getSuccessForm, getFailureForm 
 from src.modules.config.config_provider import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, COLLECTION_SELECT, TOKEN_SECRET, TOKEN_ALGORITHM
 
@@ -12,7 +13,6 @@ from src.modules.vadliator.form_validator import validate_name, validate_passwor
 from src.modules.auth.tokenizer import getToken
 
 app = Flask(__name__)
-database = getDatabase(MONGO_URL, DATABASE_NAME);
 
 #결과창
 @app.route('/result', methods=["GET"])
