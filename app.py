@@ -1,25 +1,79 @@
 from flask import Flask, render_template, request, jsonify
 
-from modules.env import PORT, MONGO_URL, DATABASE_NAME, COLLECTION_USER, COLLECTION_CAPSULE, TOKEN_SECRET, TOKEN_ALGORITHM
-from modules.database import getMongoClient
-from modules.form import getSuccessForm, getFailureForm
+# Provider : 특정 기능을 공급하는 함수들
+from db import getUser, getSelect, getCapsule
+from src.modules.provider.form_provider import getSuccessForm, getFailureForm 
+from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORITHM
 
-from modules.tokenizer import getToken
-from modules.validate import validate_name, validate_password
+# Validator : 특정 값의 유효성을 테스트하는 함수들
+from src.modules.vadliator.form_validator import validate_name, validate_password
+
+# Tokenizer : 토큰을 생성하는 함수
+from src.modules.auth.tokenizer import getToken
 
 app = Flask(__name__)
-database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
-#결과창
-@app.route('/result',methods=["GET"])
+# 결과창
+@app.route('/result', methods=["GET"])
 def result_list():
-    # querys=requests.form('questions')
-    # arrays_pro    perty=request.form['uesrs_choose']
-    # list=list(DATABASE_NAME.articles.find({'writer':[arrays_property.winter]}))
-    # querys=[{'name':'n1','desc':'d1','option':'o1'}]
-    coffees=list(database[COLLECTION_CAPSULE].find({},{'_id':False}))
+    doc={
+        'cake_receive' : request.form['cake_give'],
+        'apple_receive' : request.form['apple_give'],
+        'strength_receive' : request.form['strength_give'],
+        'milk_receive' : request.form['milk_give'],
+        'size_receive' : request.form['size_give'],
+    }
+    def taste(doc):
+        strong_sum=0
+        for i in doc:
+            strong_sum+=2-int(i)
+        if strong_sum > 5:
+            strong_sum=5;
+        if strong_sum<0:
+            strong_sum=0;
+        bitter_sum=0
+        for i in doc:
+            strong_sum+=2-int(i)
+        if strong_sum > 5:
+            strong_sum=5;
+        if strong_sum<0:
+            strong_sum=0;strong_sum=0
+        for i in doc:
+            strong_sum+=2-int(i)
+        if strong_sum > 5:
+            strong_sum=5;
+        if strong_sum<0:
+            strong_sum=0;
+
+    coffees=list(getCapsule().find({},{'_id':False}))
     print(len(coffees))
-    return render_template('/pages/result.html', list=coffees, title='캡슐커피 취향저격')
+    return render_template('/pages/result.html',list=querys, title='캡슐커피 취향저격', user_name='name')
+
+@app.route('/api/result',methods=["POST"])
+def saver_cof():
+    print('checkapi')
+    cof_name=request.form['cof_name']
+    user_name=request.form['user_name']
+    print(cof_name,user_name)
+    find = getSelect().find_one({
+        'user_name': user_name,
+    })
+
+    if find is not None:
+        # 전에 선택했던 사용자인 경우
+        getSelect().update_one({'user_name':user_name},{'$set':{'cof_name':cof_name}})
+    else:
+        # 사용한 기록이 없는 사용자안 경우 -> 기록
+        insert = getSelect().insert_one({
+            'user_name': user_name,
+            'cof_name': cof_name
+        })
+    return jsonify(
+            getSuccessForm('기록성공', {
+                'name':user_name,
+                'cof_name': cof_name,
+            })
+        )
 
 @app.route('/join', methods=['GET'])
 def join():
@@ -50,7 +104,7 @@ def apiJoin():
         )
 
     # 중복 검사
-    find = database[COLLECTION_USER].find_one({
+    find = getUser().find_one({
         'name': name,
         'password': password
     })
@@ -62,7 +116,7 @@ def apiJoin():
         );
     else:
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
-        insert = database[COLLECTION_USER].insert_one({
+        insert = getUser().insert_one({
             'name': name,
             'password': password
         })
@@ -86,7 +140,7 @@ def apiLogin():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
-    find = database[COLLECTION_USER].find_one({
+    find = getUser().find_one({
         'name': name,
         'password': password
     })
@@ -108,34 +162,14 @@ def apiLogin():
 #선택창 이름 불러오기
 @app.route('/nespresso', methods=['GET'])
 def show_nespresso():
-    name = request.form['name']
-    return render_template('./pages/select.html', title='캡슐커피 취향저격',name=name)
-
-#선택 값 저장하기
-@app.route("/nespresso", methods=["POST"])
-def save_nespresso():
-    cake_receive = request.form['cake_give']
-    apple_receive = request.form['apple_give']
-    strength_receive = request.form['strength_give']
-    milk_receive = request.form['milk_give']
-    size_receive = request.form['size_give']
-
-    doc = {
-        'cake': cake_receive,
-        'apple': apple_receive,
-        'strength': strength_receive,
-        'milk': milk_receive,
-        'size': size_receive
-    }
-    database.COLLECTION_CAPSULE.insert_one(doc)
-
-    return jsonify({'msg': '선택 완료!'})
+    name = request.args.get('name')
+    return render_template('./pages/select.html', title='캡슐커피 취향저격', name=name)
 
 #index 창
 @app.route("/")
 def main():
-    name = request.form['name']
-    return render_template("index.html", name=name)
+    img='https://www.nespresso.com/shared_res/mos/free_html/kr/images/Voltesso-Mobile.jpg'
+    return render_template("/pages/index.html",img=img)
 
 if __name__ == '__main__':
 

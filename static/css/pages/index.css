@@ -1,21 +1,29 @@
 
-    .wrap {
-        width: 1080px;
-        margin: 10px auto;
-        border: 1px solid wheat;
-    }
+.wrap {
+    width: 1080px;
+    margin: 10px auto;
+    border: 1px solid wheat;
+}
 
-    .wrap img {
-        width: 100%;
-        vertical-align: middle;
+.wrap img {
+    width: 100%;
+    vertical-align: middle;
 
-        background-color: white;
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
+    background-color: white;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
-    .text {
-        padding: 5px 10px;
-        text-align: center;
-    }
+.text {
+    position: absolute;
+    top: 330px;
+    right: 500px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.btn btn-outline-warning {
+    margin: 20px auto 0 auto;
+}
