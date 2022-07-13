@@ -10,29 +10,6 @@
     background-image: cover;
 }
 
-.image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    z-index: -10;
-    position: fixed;
-}
 .btn btn-outline-warning {
     margin: 20px auto 0 auto;
-}
-
-.header {
-}
-.header_title {
-    color: white;
-    font-weight: 600;
-    text-align: center;
-
-    padding: 5px 10px;
-}
-.header_btns {
-    gap: 10pxw;
-    display: flex;
-    flex-direction: column;
 }
