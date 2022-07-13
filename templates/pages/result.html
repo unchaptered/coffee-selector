@@ -1,29 +1,35 @@
 {% extends 'layout/layout.html' %}
 {% block content %}
-    <link href="../static/css/result.css" rel="stylesheet" type="text/css" />
-<script src="../static/js/result.js"></script>
-<div class="content">
-    <h1 class="header">제목</h1>
+    <link href="../static/css/result.css" rel="stylesheet" type="text/css"/>
+    <script src="../static/js/result.js"></script>
+    <div class="content">
+    <h1 class="header">당신의 취향은!</h1>
     <div class="card-box">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            {% for  arr in list %}
-                <div class="col">
-                    <div class="card h-100">
-                        <button onclick=image_btn('{{ arr.name }}') class="image-btn" id="{{arr.name}}">
-                            <img src="https://www.nespresso.com/ecom/medias/sys_master/public/15431416021022/Exotic-Liminha-VL-PLP-Before-318x318-2022.png?impolicy=product&imwidth=150"
-                                 class="card-img-top" alt="...">
-                        </button>
-                        <label for="{{arr.name}}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ arr.name }}</h5>
-                                <p class="card-text">{{ arr.desc }}</p>
-                                <p class="card-text">{{ arr.option }}</p>
-                            </div>
-                        </label>
+        {% if list|length >0 %}
+             <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for  arr in list %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <button onclick=select_btn('{{ user_name }}','{{ arr.name }}') class="image-btn" id="{{ arr.name }}">
+                                <img src="https://www.nespresso.com/ecom/medias/sys_master/public/15431416021022/Exotic-Liminha-VL-PLP-Before-318x318-2022.png?impolicy=product&imwidth=150"
+                                     class="card-img-top" alt="...">
+                            </button>
+                            <label for="{{ arr.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ arr.name }}</h5>
+                                    <p class="card-text">{{ arr.desc }}</p>
+                                    <p class="card-text">{{ arr.option }}</p>
+                                </div>
+                            </label>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+             </div>
+        {% else %}
+            <div class="zeroCard">
+                <h1>? 없네요!
+                잠은 잘 오겠군요!</h1>
+            </div>
+        {% endif %}
     </div>
-</div>
-    {% endblock %}
+{% endblock %}

@@ -8,4 +8,8 @@ MONGO_URL = os.environ.get('MONGO_URL')                     # MongoDB Atlas URL 
 DATABASE_NAME = os.environ.get('DATABASE_NAME')             # MongoDB Atlas DB 이름
 
 COLLECTION_USER = os.environ.get('COLLECTION_USER')         # MongoDB Atlas Collection 이름
-COLLECTION_CAPSULE = os.environ.get('COLLECTION_CAPSULE')   # MongoDB Atlas Collection 이름
+COLLECTION_CAPSULE = os.environ.get('COLLECTION_CAPSULE')
+COLLECTION_SELECT = os.environ.get('COLLECTION_SELECT')
+
+TOKEN_SECRET = os.environ.get('TOKEN_SECRET')
+TOKEN_ALGORITHM = os.environ.get('TOKEN_ALGORITHM')

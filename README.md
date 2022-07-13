@@ -4,6 +4,7 @@
 - 설명 : 강도, 산미, 취향등에 선택에 따라 캡슐커피를 추천해주는 사이트
 - 저장소 : https://github.com/unchaptered/coffee-selector
 - 작업표 : https://github.com/users/unchaptered/projects/5
+- 기술문서 : README.md 최하단의 기술문서 리스트를 참고해주세요.
 
 <hr>
 
@@ -40,6 +41,7 @@ root
 | python-dotenv | 환경변수 출력 모듈 |
 | pymongo, dnspython | MongoDB 커넥터 |
 | requests, bs4 | 크롤링용 모듈 |
+| PyJWT | JWT 토큰 모듈 |
 
 <hr>
 
