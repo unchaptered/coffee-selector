@@ -10,8 +10,12 @@ from modules.validate import validate_name, validate_password
 app = Flask(__name__)
 database = getMongoClient(MONGO_URL)[DATABASE_NAME]
 
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html', title='캡슐커피 취향저격')
+
 #결과창
-@app.route('/result',methods=["GET"])
+@app.route('/result', methods=["GET"])
 def result_list():
     # querys=requests.form('questions')
     # arrays_pro    perty=request.form['uesrs_choose']
