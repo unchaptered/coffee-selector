@@ -1,29 +1,38 @@
-
 .wrap {
-    width: 1080px;
-    margin: 10px auto;
-    border: 1px solid wheat;
+    width: 100vw;
+    height: 100vh;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image: cover;
 }
 
-.wrap img {
+.image {
     width: 100%;
-    vertical-align: middle;
+    height: 100%;
+    object-fit: cover;
 
-    background-color: white;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    z-index: -10;
+    position: fixed;
 }
-
-.text {
-    position: absolute;
-    top: 330px;
-    right: 500px;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-}
-
 .btn btn-outline-warning {
     margin: 20px auto 0 auto;
+}
+
+.header {
+}
+.header_title {
+    color: white;
+    font-weight: 600;
+    text-align: center;
+
+    padding: 5px 10px;
+}
+.header_btns {
+    gap: 10pxw;
+    display: flex;
+    flex-direction: column;
 }
