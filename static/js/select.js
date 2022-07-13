@@ -16,11 +16,11 @@ function show_nespresso() {
 }
 
 function save_nespresso() {
-    let cake = $("#cake option:selected").val();
-    let apple = $("#apple option:selected").val();
-    let strength = $("#strength option:selected").val();
-    let milk = $("#milk option:selected").val();
-    let size = $("#size option:selected").val();
+    let cake = $("#cake option:selected").attr('value');
+    let apple = $("#apple option:selected").attr('value');
+    let strength = $("#strength option:selected").attr('value');
+    let milk = $("#milk option:selected").attr('value');
+    let size = $("#size option:selected").attr('value');
 
     $.ajax({
         type: "POST",
