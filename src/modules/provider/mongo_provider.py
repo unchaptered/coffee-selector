@@ -4,6 +4,7 @@ from ..config.config_provider import COLLECTION_USER, COLLECTION_CAPSULE, COLLEC
 def getMongoClient(MONGO_URL):
     """
     지정된 MONGO_URL 을 사용하여 MongoDB Atlas 서버와 연결을 하게 됩니다.
+    @depreacted
     """
     return MongoClient(MONGO_URL)
 
@@ -16,5 +17,5 @@ def getUserConnection(database: Database):
 def getCapsuleConnection(database: Database):
     return database[COLLECTION_CAPSULE]
 
-def getSelectConnect(database: Database):
+def getSelectConnection(database: Database):
     return database[COLLECTION_SELECT]
