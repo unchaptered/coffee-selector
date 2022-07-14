@@ -102,13 +102,9 @@ def api_join():
             })
         )
 
-    hashed_password = getHashPw(bcrypt, password)
-
-    print(name, password, hashed_password)
     # 중복 검사
     find = getUser().find_one({
-        'name': name,
-        'password': hashed_password
+        'name': name
     })
 
     if find is not None:
@@ -120,7 +116,7 @@ def api_join():
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
         insert = getUser().insert_one({
             'name': name,
-            'password': hashed_password
+            'password': getHashPw(bcrypt, password)
         })
 
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
@@ -133,7 +129,6 @@ def api_join():
 
 
 @app.route('/api/login', methods=['POST'])
-
 def api_login():
 
     name = validate_name(request.form['name'])
