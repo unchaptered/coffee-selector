@@ -213,6 +213,30 @@ def main():
     img = 'https://www.nespresso.com/shared_res/mos/free_html/kr/images/Voltesso-Mobile.jpg'
     return render_template("/pages/index.html", img=img)
 
+@app.route('/api/get_reviews', methods=['GET'])
+def get_reviews():
+    review_receive = request.args.get("review_give")
+    result = list(db.reviews.find({"review": review_receive}, {'_id': 0}))
+
+    return jsonify({'result': 'success', 'reviews': result})
+
+
+@app.route('/api/save_review', methods=['POST'])
+def save_review():
+    review_receive = request.form['review_give']
+    doc = {"review": review_receive}
+    getSelect().reviews.insert_one(doc)
+    return jsonify({'result': 'success', 'msg': f'review"{review_receive}" saved'})
+
+
+@app.route('/api/delete_review', methods=['POST'])
+def delete_review():
+    review_receive = request.form['review_give']
+    number_receive = int(request.form["number_give"])
+    review = list(getSelect().reviews.find({"review": review_receive}))[number_receive]["review"]
+    print(review_receive, review)
+    getSelect().reviews.delete_one({"review": review})
+    return jsonify({'result': 'success', 'msg': f'review #{number_receive} of "{review_receive}" deleted'})
 
 if __name__ == '__main__':
     app.run(
