@@ -14,6 +14,52 @@ from src.modules.auth.tokenizer import getToken
 app = Flask(__name__)
 # bcrypt = getBcrypt(app)
 
+@app.route("/")
+def main():
+    img = 'https://www.nespresso.com/shared_res/mos/free_html/kr/images/Voltesso-Mobile.jpg'
+    return render_template("/pages/index.html", img=img)
+
+@app.route('/join', methods=['GET'])
+def join():
+    return render_template('./pages/join.html', title='캡슐커피 취향저격')
+
+@app.route('/login', methods=['GET'])
+def login():
+    name = request.args.get('name')
+
+    if name is not None:
+        return render_template('./pages/login.html', name=name, title='캡슐커피 취향 저격')
+    else:
+        return render_template('./pages/login.html', title='캡슐커피 취향저격')
+
+@app.route('/login/guest', methods=['GET'])
+def login_as_guest():
+    return redirect(url_for('select'));
+
+# 선택창 이름 불러오기
+@app.route('/nespresso', methods=['GET'])
+def show_nespresso():
+    name = request.args.get('name')
+    return render_template('./pages/select.html', title='캡슐커피 취향저격', name=name)
+
+# 선택창 select에 임시저장
+@app.route('/nespresso', methods=['POST'])
+def save_nespresso():
+    name=request.form['name']
+    doc = {
+        'user_name': name,
+        'cake':int( request.form['cake_give']),
+        'apple': int(request.form['apple_give']),
+        'strength': int(request.form['strength_give']),
+        'milk': int(request.form['milk_give']),
+        'size': int(request.form['size_give'])
+    }
+    if getSelect().find_one({'user_name': name}) is not None:
+        getSelect().delete_one({'user_name': name})
+        getSelect().insert_one(doc)
+    else:
+        getSelect().insert_one(doc)
+    return jsonify({'msg': '선택 완료!'})
 
 # 결과창
 @app.route('/result', methods=["GET"])
@@ -83,25 +129,6 @@ def saver_cof():
         })
     )
 
-
-@app.route('/join', methods=['GET'])
-def join():
-    return render_template('./pages/join.html', title='캡슐커피 취향저격')
-
-
-@app.route('/login', methods=['GET'])
-def login():
-    name = request.args.get('name')
-
-    if name is not None:
-        return render_template('./pages/login.html', name=name, title='캡슐커피 취향 저격')
-    else:
-        return render_template('./pages/login.html', title='캡슐커피 취향저격')
-
-@app.route('/login/guest', methods=['GET'])
-def login_as_guest():
-    return redirect(url_for('select'));
-
 @app.route('/api/join', methods=['POST'])
 def api_join():
 
@@ -142,7 +169,6 @@ def api_join():
             })
         );
 
-
 @app.route('/api/login', methods=['POST'])
 def api_login():
 
@@ -178,40 +204,6 @@ def api_login():
                 'accessToken': token
             })
         )
-
-
-# 선택창 이름 불러오기
-@app.route('/nespresso', methods=['GET'])
-def show_nespresso():
-    name = request.args.get('name')
-    return render_template('./pages/select.html', title='캡슐커피 취향저격', name=name)
-
-
-# 선택창 select에 임시저장
-@app.route('/nespresso', methods=['POST'])
-def save_nespresso():
-    name=request.form['name']
-    doc = {
-        'user_name': name,
-        'cake':int( request.form['cake_give']),
-        'apple': int(request.form['apple_give']),
-        'strength': int(request.form['strength_give']),
-        'milk': int(request.form['milk_give']),
-        'size': int(request.form['size_give'])
-    }
-    if getSelect().find_one({'user_name': name}) is not None:
-        getSelect().delete_one({'user_name': name})
-        getSelect().insert_one(doc)
-    else:
-        getSelect().insert_one(doc)
-    return jsonify({'msg': '선택 완료!'})
-
-
-# index 창
-@app.route("/")
-def main():
-    img = 'https://www.nespresso.com/shared_res/mos/free_html/kr/images/Voltesso-Mobile.jpg'
-    return render_template("/pages/index.html", img=img)
 
 @app.route('/api/get_reviews', methods=['GET'])
 def get_reviews():
