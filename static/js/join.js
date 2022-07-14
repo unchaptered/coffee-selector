@@ -71,8 +71,13 @@ const postJoin = _ => {
             message,
             result: { name, password }
         }) => {
-            window.alert(`${name} 으로 회원가입이 완료되었습니다. `);
-            location.href = `/login?name=${name}`
+
+            if (isSuccess) {
+                window.alert(message);
+
+                location.href = `/login?name=${name}`;
+            } else return window.alert(message);
+            
         }
     });
     
