@@ -1,8 +1,7 @@
-import bcrypt
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 
 # Provider : 특정 기능을 공급하는 함수들
-from db import getUser, getSelect, getCapsule
+from database import getUser, getSelect, getCapsule
 from src.modules.provider.form_provider import getSuccessForm, getFailureForm
 from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORITHM
 
