@@ -8,3 +8,4 @@ trouble shooting
 4. 팀원들 간에 특정 변수(PORT, DB_URL 등) 가 달라져야 했던 이유 _ 신수정(@crystal025)
 5. MongoDB Atlas 함수가 작동하지 않았던 경우 _ 최성영(@cesdea)
 6. 화면 간의 변수 이동을 하는 방법 _ 최성영(@cesdea)
+7. PyJwt.decode 가 AWS 에서만 에러가 일으키는 경우 _ 이민석(@unchaptered), 신수정(@crystal025)
