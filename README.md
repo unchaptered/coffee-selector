@@ -5,7 +5,7 @@
 > [사이트 방문하기](http://coffe-selector.shop/) - coffee-selector.shop <br>
 > [유투브 영상 보기](https://youtu.be/PZmnmWDcpUE) - www.youtube.com/watch?v=PZmnmWDcpUE
 
-- 제목 : '캡슐커피 취향저격'
+- 제목 : '취향저격 커피 찾기'
 - 설명 : 강도, 산미, 취향등에 선택에 따라 캡슐커피를 추천해주는 사이트
 - 일정표 : [취향저격 커피추천 - git projects](https://github.com/users/unchaptered/projects/5)
 - 서버 저장소 : [Coffee Selector - git repository](https://github.com/unchaptered/coffee-selector)
