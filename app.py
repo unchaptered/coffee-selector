@@ -1,9 +1,7 @@
-from cgi import print_arguments
-import bcrypt
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 
 # Provider : 특정 기능을 공급하는 함수들
-from db import getUser, getSelect, getCapsule
+from database import getUser, getSelect, getCapsule
 from src.modules.provider.form_provider import getSuccessForm, getFailureForm
 from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORITHM
 
@@ -11,10 +9,10 @@ from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORIT
 from src.modules.vadliator.form_validator import validate_name, validate_password
 # Tokenizer : 토큰을 생성하는 함수
 from src.modules.auth.tokenizer import getToken
-from src.modules.auth.bcrypt import compareHashPw, getBcrypt, getHashPw
+# from src.modules.auth.bcrypt import compareHashPw, getBcrypt, getHashPw
 
 app = Flask(__name__)
-bcrypt = getBcrypt(app)
+# bcrypt = getBcrypt(app)
 
 
 # 결과창
@@ -66,6 +64,7 @@ def result_list():
                 break
             count = 0
     return render_template('/pages/result.html',list=root1, title='캡슐커피 취향저격', user_name=user_name)
+
 @app.route('/api/result', methods=["POST"])
 def saver_cof():
     cof_name = request.form['cof_name']
@@ -99,7 +98,6 @@ def login():
     else:
         return render_template('./pages/login.html', title='캡슐커피 취향저격')
 
-
 @app.route('/login/guest', methods=['GET'])
 def login_as_guest():
     return redirect(url_for('select'));
@@ -118,13 +116,9 @@ def api_join():
             })
         )
 
-    hashed_password = getHashPw(bcrypt, password)
-
-    print(name, password, hashed_password)
     # 중복 검사
     find = getUser().find_one({
-        'name': name,
-        'password': hashed_password
+        'name': name
     })
 
     if find is not None:
@@ -136,7 +130,8 @@ def api_join():
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
         insert = getUser().insert_one({
             'name': name,
-            'password': hashed_password
+            'password': password
+            # 'password': getHashPw(bcrypt, password)
         })
 
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
@@ -165,13 +160,13 @@ def api_login():
     if is_exists is None:
         return jsonify(getFailureForm('존재하지 않는 이름을 전달 받았습니다.'))
 
-    compared = compareHashPw(
-        bcrypt,
-        is_exists['password'],
-        password
-    )
+    # compared = compareHashPw(
+    #     bcrypt,
+    #     is_exists['password'],
+    #     password
+    # )
 
-    if compared is False:
+    if is_exists['password'] == password is False:
         return jsonify(getFailureForm('일치하지 않는 비밀번호를 전달 받았습니다.'))
 
     else:
