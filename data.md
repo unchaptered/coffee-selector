@@ -11,8 +11,8 @@
 "tasty": {
 	"string": "13"
 	"bitter": "5"
-	"sour":"1" },
-
+	"sour":"1" }
+},
 {
 "image_url": "https://www.nespresso.com/ecom/medias/sys_master/public/12839238107166.png"
 "title": "이스피라치오네 팔레르모 카자르",
@@ -22,8 +22,8 @@
 "tasty": {
 	"string": "12"
 	"bitter": "5"
-	"sour":"1" },
-
+	"sour":"1" }
+}
 {
 "image_url": "https://www.nespresso.com/ecom/medias/sys_master/public/12839223492638.png"
 "title": "이스피라치오네 리스트레토 이탈리아노",
@@ -33,8 +33,8 @@
 "tasty": {
 	"string": "10"
 	"bitter": "4"
-	"sour": "3" },
-
+	"sour": "3" }
+}
 {
 "image_url": "https://www.nespresso.com/ecom/medias/sys_master/public/12839071711262.png"
 "title": "이스피라치오네 피렌체 아르페지오",
@@ -345,5 +345,5 @@
 	"string": "6"
 	"bitter": "0"
 	"sour": "0" 
-},
+}
 
