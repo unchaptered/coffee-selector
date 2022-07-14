@@ -1,3 +1,4 @@
+import bcrypt
 from flask_bcrypt import Bcrypt
 
 def getBcrypt(app: any) -> Bcrypt:
@@ -19,4 +20,7 @@ def getHashPw(brcypt: Bcrypt, pw: str):
 
     decode('ascii) 부분으로 문자열 타입으로 변환하였습니다.
     """
-    return brcypt.generate_password_hash('pw').decode('ascii')
+    return brcypt.generate_password_hash(pw)
+
+def compareHashPw(brcypt: Bcrypt, hashedPw: str, pw:str):
+    return brcypt.check_password_hash(hashedPw, pw)
