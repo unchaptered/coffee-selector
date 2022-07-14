@@ -2,9 +2,9 @@
 
 {% block content %}
 
-    <link href="../static/css/pages/index.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/components/header.css" rel="stylesheet" type="text/css" />
-    <link href="../static/css/components/full-image.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/css/pages/index.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/css/components/header.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/css/components/full-image.css" rel="stylesheet" type="text/css" />
     
     <main class="wrap">
         <img src="../../static/index.png" class="image" />
@@ -15,11 +15,17 @@
             <h1 class="header_title">취향저격 커피찾기</h1>
             <div class="header_btns">
                 
-                <button type="button" class="btn btn-outline-warning header_button" onclick="window.location.href = '/join'"><span style="font-weight: 600;">Join</span> 하고 취향저격 커피 찾기!</button>
+                <button type="button" class="btn btn-outline-warning header_button" onclick="window.location.href = '/join'"><span style="font-weight: 600;">가입</span> 하고 취향저격 커피 찾기!</button>
 
-                <button type="button" class="btn btn-outline-warning header_button" onclick="window.location.href = '/login'"><span style="font-weight: 600;">Login</span>하고 취향저격 커피 찾기!</button>
+                <button type="button" class="btn btn-outline-warning header_button" onclick="window.location.href = '/login'"><span style="font-weight: 600;">로그인</span>하고 취향저격 커피 찾기!</button>
 
-                <button type="button" class="btn btn-outline-warning header_button" onclick="window.location.href = '/login/guest'"><span style="font-weight: 600;">Guest</span>로 로그인하기</button>
+                
+                <div class=" header_info">
+
+                    <button type="button" class="btn btn-outline-warning header_button"
+                        onclick="window.open('https://github.com/unchaptered/coffee-selector')"><span style="font-weight: 600;">Github 방문하기</button>
+
+                </div>
 
             </div>
         </header>
