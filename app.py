@@ -74,19 +74,19 @@ def login():
     else:
         return render_template('./pages/login.html', title='캡슐커피 취향저격')
 
-<<<<<<< HEAD
+
 
 @app.route('/api/join', methods=['POST'])
 def apiJoin():
-=======
-@app.route('/login/guest', methods=['GET'])
-def login_as_guest():
+
+ @app.route('/login/guest', methods=['GET'])
+ def login_as_guest():
     return redirect(url_for('select'));
 
 @app.route('/api/join', methods=['POST'])
 def api_join():
 
->>>>>>> ca7d3a936ed8a844890f1fe9639bef203f1c57a5
+
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
     
@@ -129,12 +129,12 @@ def api_join():
 
 
 @app.route('/api/login', methods=['POST'])
-<<<<<<< HEAD
-def apiLogin():
-=======
-def api_login():
 
->>>>>>> ca7d3a936ed8a844890f1fe9639bef203f1c57a5
+def apiLogin():
+
+ def api_login():
+
+
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
 
