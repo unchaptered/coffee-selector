@@ -51,6 +51,7 @@ def result_list():
                 root1.remove(r)
 
     return render_template('/pages/result.html',list=root1, title='캡슐커피 취향저격', user_name=user_name)
+
 @app.route('/api/result', methods=["POST"])
 def saver_cof():
     cof_name = request.form['cof_name']
@@ -84,28 +85,13 @@ def login():
     else:
         return render_template('./pages/login.html', title='캡슐커피 취향저격')
 
-<<<<<<< HEAD
-
-
-@app.route('/api/join', methods=['POST'])
-def apiJoin():
-
- @app.route('/login/guest', methods=['GET'])
- def login_as_guest():
-=======
-
 @app.route('/login/guest', methods=['GET'])
 def login_as_guest():
->>>>>>> d1dde0c5fd37ffa0eb31a51960d73615817ad045
     return redirect(url_for('select'));
 
 @app.route('/api/join', methods=['POST'])
 def api_join():
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d1dde0c5fd37ffa0eb31a51960d73615817ad045
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
     
@@ -148,17 +134,9 @@ def api_join():
 
 
 @app.route('/api/login', methods=['POST'])
-<<<<<<< HEAD
 
-def apiLogin():
-
- def api_login():
-
-
-=======
 def api_login():
 
->>>>>>> d1dde0c5fd37ffa0eb31a51960d73615817ad045
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
 
