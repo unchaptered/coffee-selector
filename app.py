@@ -1,4 +1,3 @@
-from cgi import print_arguments
 import bcrypt
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 
