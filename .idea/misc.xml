@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
+
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (COFFEE-SELECTOR)" project-jdk-type="Python SDK" />
-=======
-<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (6)" project-jdk-type="Python SDK" />
-=======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8" project-jdk-type="Python SDK" />
->>>>>>> 1fa09ee59ab57d00cb9870d2a29dd50697cfed30
->>>>>>> 3f07a494d0a6af8f44c79c080448fe9141f60c46
+  
 </project>

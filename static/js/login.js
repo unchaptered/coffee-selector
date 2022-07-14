@@ -11,6 +11,8 @@ $(document).ready(
         const validationTargets = new Set(['이름', '비밀번호']);
 
         $('#name').keyup(({ originalEvent: { target: { value: name } } }) => {
+
+            console.log(`isValidName ${isValidName} isValidPassword ${isValidPassword}`);
             
             isValidName = validateName(name);
             classSwitcher(isValidName, 'name');
@@ -20,6 +22,8 @@ $(document).ready(
 
         });
         $('#password').keyup(({ originalEvent: { target: { value: pw } } }) => {
+            
+            console.log(`isValidName ${isValidName} isValidPassword ${isValidPassword}`);
 
             isValidPassword = validatePassword(pw);
             classSwitcher(isValidPassword, 'password');
@@ -38,8 +42,12 @@ const postLogin = _ => {
     const name = $('#name').val().toString();
     const password = $('#password').val().toString();
 
+    console.log(`버틐 클릭 : 유효성 검사 진행 ${name} / ${password}`);
+
     if ( !validateName(name)) return window.alert('이름은 3자 ~ 10자 사이의 문자열로 정해야 합니다.');
     else if ( !validatePassword(password)) return window.alert('비밀번호는 3자 ~ 30자 사이의 문자열로 정해야 합니다.');
+
+    console.log(`버튼 클릭 : 유효성 검사 통과!`);
 
     $.ajax({
         type: 'POST',
@@ -54,6 +62,14 @@ const postLogin = _ => {
             result: { name, password, accessToken }
         }) => {
             if (isSuccess) {
+                console.log({
+                    isSuccess,
+                    message,
+                    result: {
+                        name, password, accessToken
+                    }
+                });
+                
                 window.alert(message);
 
                 localStorage.setItem('name', name);
