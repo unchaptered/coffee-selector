@@ -22,33 +22,47 @@ def result_list():
     doc = getSelect().find_one({'user_name': user_name})
     print(doc)
     root1=list(getCapsule().find({},{"_id":False}))
-    print(root1)
-    if doc['strength'] == 0:
-        for r in root1:
-            if r['tasty']['strong']>7:
-                root1.remove(r)
+    if doc['strength'] == 1:
+        count=0
+        while True:
+            for i in root1:
+                if i['tasty']['strong']<=7:
+                    count+=1
+                    root1.remove(i)
+            if count==0:
+                break
+            count=0
     else:
-        for r in root1:
-            if r['tasty']['strong']<=7:
-                root1.remove(r)
-    # if doc['apple'] == 0:
-    #     for r in root1:
-    #         if r['tasty']['sour']>3:
-    #             root1.remove(r)
-    # else:
-    #     for r in root1:
-    #         if r['tasty']['sour']<=3:
-    #             root1.remove(r)
+        count = 0
+        while True:
+            for i in root1:
+                if i['tasty']['strong'] > 7:
+                    count += 1
+                    root1.remove(i)
+            if count == 0:
+                break
+            count = 0
 
     if doc['milk'] == 0:
-        for r in root1:
-            if r['tasty']['bitter']>3:
-                root1.remove(r)
+        count = 0
+        while True:
+            for i in root1:
+                if i['tasty']['bitter'] >2:
+                    count += 1
+                    root1.remove(i)
+            if count == 0:
+                break
+            count = 0
     else:
-        for r in root1:
-            if r['tasty']['bitter']<=2:
-                root1.remove(r)
-
+        count = 0
+        while True:
+            for i in root1:
+                if i['tasty']['bitter'] <= 2:
+                    count += 1
+                    root1.remove(i)
+            if count == 0:
+                break
+            count = 0
     return render_template('/pages/result.html',list=root1, title='캡슐커피 취향저격', user_name=user_name)
 
 @app.route('/api/result', methods=["POST"])
