@@ -1,7 +1,7 @@
 from src.modules.provider.mongo_provider import getDatabase, getUserConnection, getSelectConnection, getCapsuleConnection
 from src.modules.config.config_provider import MONGO_URL, DATABASE_NAME
 
-database = getDatabase('mongodb+srv://wlwjsan:!jeunga1125@cluster0.yrmjgdx.mongodb.net/?retryWrites=true&w=majority')('sparta');
+database = getDatabase(MONGO_URL)(DATABASE_NAME);
 
 def getUser():
     return getUserConnection(database)
