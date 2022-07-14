@@ -1,3 +1,5 @@
+from cgi import print_arguments
+import bcrypt
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 
 # Provider : 특정 기능을 공급하는 함수들
@@ -9,9 +11,10 @@ from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORIT
 from src.modules.vadliator.form_validator import validate_name, validate_password
 # Tokenizer : 토큰을 생성하는 함수
 from src.modules.auth.tokenizer import getToken
-from src.modules.auth.bcrypt import getBcrypt, getHashPw
+from src.modules.auth.bcrypt import compareHashPw, getBcrypt, getHashPw
 
 app = Flask(__name__)
+bcrypt = getBcrypt(app)
 
 # 결과창
 @app.route('/result', methods=["GET"])
@@ -107,7 +110,7 @@ def api_join():
             })
         )
 
-    hashed_password = getHashPw(getBcrypt(app), password)
+    hashed_password = getHashPw(bcrypt, password)
 
     print(name, password, hashed_password)
     # 중복 검사
@@ -147,14 +150,22 @@ def api_login():
             getFailureForm('유효하지 않는 가입을 전달 받았습니다.')
         )
 
-    hashed_password = getHashPw(getBcrypt(app), password)
-
-    find = getUser().find_one({
-        'name': name,
-        'password': hashed_password
+    is_exists = getUser().find_one({
+        'name': name
     })
+    if is_exists is None:
+        return jsonify(getFailureForm('존재하지 않는 이름을 전달 받았습니다.'))
 
-    if find is not None:
+    compared = compareHashPw(
+        bcrypt,
+        is_exists['password'],
+        password
+    )
+
+    if compared is False:
+        return jsonify(getFailureForm('일치하지 않는 비밀번호를 전달 받았습니다.'))
+
+    else:
         token = getToken({ 'name': name }, TOKEN_SECRET, TOKEN_ALGORITHM )
         return jsonify(
             getSuccessForm('로그인에 성공하셨습니다.', {
@@ -162,10 +173,6 @@ def api_login():
                 'password': '비공개',
                 'accessToken': token
             })
-        )
-    else:
-        return jsonify(
-            getFailureForm('로그인에 실패하셨습니다.')
         )
 
 #선택창 이름 불러오기
