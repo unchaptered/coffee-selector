@@ -26,18 +26,26 @@ def result_list():
         for r in root1:
             if r['tasty']['strong']>7:
                 root1.remove(r)
-    if len(root1)==0:
-        return render_template('/pages/result.html', list=root1, title='캡슐커피 취향저격', user_name=user_name)
-    if doc['apple'] == 0:
+    else:
         for r in root1:
-            if r['tasty']['sour']>3:
+            if r['tasty']['strong']<=7:
                 root1.remove(r)
+    # if doc['apple'] == 0:
+    #     for r in root1:
+    #         if r['tasty']['sour']>3:
+    #             root1.remove(r)
+    # else:
+    #     for r in root1:
+    #         if r['tasty']['sour']<=3:
+    #             root1.remove(r)
 
-    if len(root1)==0:
-        return render_template('/pages/result.html', list=root1, title='캡슐커피 취향저격', user_name=user_name)
     if doc['milk'] == 0:
         for r in root1:
             if r['tasty']['bitter']>3:
+                root1.remove(r)
+    else:
+        for r in root1:
+            if r['tasty']['bitter']<=2:
                 root1.remove(r)
 
     return render_template('/pages/result.html',list=root1, title='캡슐커피 취향저격', user_name=user_name)
@@ -74,11 +82,7 @@ def login():
     else:
         return render_template('./pages/login.html', title='캡슐커피 취향저격')
 
-<<<<<<< HEAD
 
-@app.route('/api/join', methods=['POST'])
-def apiJoin():
-=======
 @app.route('/login/guest', methods=['GET'])
 def login_as_guest():
     return redirect(url_for('select'));
@@ -86,7 +90,6 @@ def login_as_guest():
 @app.route('/api/join', methods=['POST'])
 def api_join():
 
->>>>>>> ca7d3a936ed8a844890f1fe9639bef203f1c57a5
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
     
@@ -129,12 +132,8 @@ def api_join():
 
 
 @app.route('/api/login', methods=['POST'])
-<<<<<<< HEAD
-def apiLogin():
-=======
 def api_login():
 
->>>>>>> ca7d3a936ed8a844890f1fe9639bef203f1c57a5
     name = validate_name(request.form['name'])
     password = validate_password(request.form['password'])
 
