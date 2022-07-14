@@ -9,10 +9,10 @@ from src.modules.config.config_provider import PORT, TOKEN_SECRET, TOKEN_ALGORIT
 from src.modules.vadliator.form_validator import validate_name, validate_password
 # Tokenizer : 토큰을 생성하는 함수
 from src.modules.auth.tokenizer import getToken
-from src.modules.auth.bcrypt import compareHashPw, getBcrypt, getHashPw
+# from src.modules.auth.bcrypt import compareHashPw, getBcrypt, getHashPw
 
 app = Flask(__name__)
-bcrypt = getBcrypt(app)
+# bcrypt = getBcrypt(app)
 
 
 # 결과창
@@ -116,7 +116,8 @@ def api_join():
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 실행
         insert = getUser().insert_one({
             'name': name,
-            'password': getHashPw(bcrypt, password)
+            'password': password
+            # 'password': getHashPw(bcrypt, password)
         })
 
         # 이미 중복된 사용자가 없는 경우 -> 회원가입 성공
@@ -145,13 +146,13 @@ def api_login():
     if is_exists is None:
         return jsonify(getFailureForm('존재하지 않는 이름을 전달 받았습니다.'))
 
-    compared = compareHashPw(
-        bcrypt,
-        is_exists['password'],
-        password
-    )
+    # compared = compareHashPw(
+    #     bcrypt,
+    #     is_exists['password'],
+    #     password
+    # )
 
-    if compared is False:
+    if is_exists['password'] == password is False:
         return jsonify(getFailureForm('일치하지 않는 비밀번호를 전달 받았습니다.'))
 
     else:
