@@ -3,17 +3,22 @@
 
 {% block content %}
     <link href="../../static/css/pages/join-login.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/components/full-image.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/components/header.css" rel="stylesheet" type="text/css" />
+
     <script src="../../static/js/controller/dom.controller.js"></script>
     <script src="../../static/js/validator/form.validaor.js"></script>
     <script src="../../static/js/join.js"></script>
-    
+
+    <img src="../../static/index.png" class="image" />
+
     <div class="container" id="join_container">
 
         <div id="join_inner_container">
             <!-- {#bg-light#} -->
-            <div class="p-5 text-center">
-                <h2 class="mb-2">캡슐커피</h2>
-                <h5>취향저격</h5>
+            <div class="p-5 text-center haeder">
+                <h5 onclick="location.href = location.origin + '/'">돌아가기</h5>
+                <h2 class="mb-2 header_title">취향저격 커피찾기</h2>
             </div>
 
             <div class="form-floating mb-4">
@@ -43,11 +48,14 @@
             </div>
 
             <div class="p-5 text-center">
-                <button id="form_submit" class="btn btn-primary mb-1" role="button"
+                    
+                <button id="submit" type="button" class="btn btn-outline-warning mb-2 header_button form_button"
                     onclick="postJoin()">회원가입</button>
-                <h6 class="mb-3">
-                    <a href="/login">회원 이라면? ></a>
-                </h6>
+
+                <br>
+                <button class="btn btn-outline-warning mb-2 header_button form_button"
+                    onclick="location.href = location.origin + '/login'">이미 회원이시라면?</button>
+
             </div>
 
         </div>

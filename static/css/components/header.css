@@ -1,0 +1,30 @@
+.header {
+}
+.header_title {
+    color: white;
+    font-weight: 600;
+    text-align: center;
+
+    padding: 5px 10px;
+}
+.header_btns {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header_info {
+    display: flex;
+    flex-direction: column; 
+}
+
+.header_info:active,
+.header_info:focus {
+    width: 100%;
+    background-color: white;
+}
+
+.header_button_reverse {
+    color: black;
+    border: none;
+}

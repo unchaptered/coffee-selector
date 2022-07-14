@@ -33,4 +33,4 @@ def getFailureForm(message):
         result: {}
     ```
     """
-    return getForm(True, message, {})
+    return getForm(False, message, {})
